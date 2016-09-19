@@ -1,0 +1,11 @@
+Install and use Font Awesome (icon) in i3 config
+
+1. Go to https://github.com/FortAwesome/Font-Awesome/releases
+2. Download the latest .zip file
+3. uznip awesome.zip
+4. cd that_new_folder/fonts
+5. mkdir ~/.fonts
+6. cp fontawesome.ttf ~/.fonts
+
+7. Look at http://fontawesome.io/cheatsheet/ for copy and paste characters
+8. Log out and log in for better renders :)
