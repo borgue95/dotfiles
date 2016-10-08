@@ -4,7 +4,7 @@ set number
 set t_Co=256
 
 " Comment
-highlight Comment ctermfg=DarkGray
+highlight Comment ctermfg=8
 
 " Constant
 highlight String ctermfg=33
@@ -40,9 +40,12 @@ highlight ColorColumn ctermbg=153
 """""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""
 
-" Set line breaker indicator
-set colorcolumn=80
+" Set autowrap
+set tw=80
 
+" Set line breaker indicator
+set colorcolumn=81
+highlight ColorColumn guibg=#2d2d2d ctermbg=53
 
 " Use spaces instead of tabs
 set expandtab
@@ -53,10 +56,6 @@ set smarttab
 " 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
-
-" Linebreak on 500 characters
-set lbr
-set tw=500
 
 set ai "Auto indent
 set si "Smart indent
