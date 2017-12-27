@@ -264,7 +264,7 @@ bar {
     position bottom
     status_command i3blocks -c $CONFIGS/i3blocks.conf
     tray_output $monitor1
-    font pango:DejaVu Sans Mono, FontAwesome 9
+    font pango:DejaVu Sans Mono, FontAwesome 11
     colors{
         background $bg-color
         separator  $bbbeb3
@@ -313,7 +313,7 @@ bindsym $mod+Print exec --no-startup-id bash $SCRIPTS/screenshot_full.sh
 bindsym --release $mod+Shift+Print exec --no-startup-id $SCRIPTS/screenshot_selection.sh
 
 # i3-gaps
-gaps inner 6
+gaps inner 8
 gaps outer 10
 for_window [class=".*"] border pixel 0
 hide_edge_borders both

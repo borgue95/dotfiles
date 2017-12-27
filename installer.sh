@@ -8,18 +8,26 @@
 set -e -o errexit
 
 # DEPENDENCIES
-# xset playerctl amixer not found on Raspbery Pi
+# playerctl not found on Raspbery Pi
 if [[ ! -e /proc/device-tree/model ]]; 
 then
-    sudo apt-get install xset playerctl amixer
+    #sudo apt-get install playerctl
+    echo ""
 fi
 
 # general dependencies
-sudo apt-get install git build-essential scrot imagemagick xdotool arandr rofi wget unzip
+sudo apt-get install -y -qq git build-essential scrot imagemagick xdotool arandr rofi wget unzip
 
 # i3-gaps dependencies
+if [[ ! -e /proc/device-tree/model ]];
+then
+    sudo add-apt-repository ppa:aguignard/ppa
+    sudo apt-get update
+fi
 sudo apt-get install -y -qq libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf automake libxcb-xrm-dev
 
+# i3 itself
+sudo apt-get install -y -qq i3 i3blocks i3lock
 
 # MISC
 mkdir -p $(xdg-user-dir PICTURES)/screen_shots
@@ -35,33 +43,39 @@ mkdir -p $DOT_DIR/scripts
 # VIM
 sudo apt-get install -y -q vim
 cp $GIT_DIR/vim/vimrc $DOT_DIR/vim/vimrc
-mv $HOME/.vimrc $HOME/.vimrc_old
+if [[ -e $HOME/.vimrc ]];
+then
+    mv $HOME/.vimrc $HOME/.vimrc_old
+fi
 ln -sf $DOT_DIR/vim/vimrc $HOME/.vimrc
 
 # VIM plugins
-echo "The file ~/.vim/bundle/Vundle.vim is going to be removed. Sure [press enter to continue]?"
-read
-rm -rf $HOME/.vim/bundle/Vundle.vim
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim +PluginInstall +qall
+if [[ ! -e ~/.vim/bundle/Vundle.vim ]];
+then
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    vim +PluginInstall +qall
+else
+    echo "Vundle vim seams to be installed on ~/.vim/bundle/Vundle.vim. Skipping"
+fi
 
 # i3-gaps
 mkdir -p $HOME/apps/src
-echo "The folder ~/apps/src/i3-gaps is going to be removed. Sure [press enter to continue]?"
-read
-rm -rf $HOME/apps/src/i3-gaps
-git clone https://www.github.com/Airblader/i3 $HOME/apps/src/i3-gaps
-cd $HOME/apps/src/i3-gaps
-autoreconf --force --install
-rm -rf build/
-mkdir -p build && cd build/
-../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
-make -j4
-sudo make install
-cd
+if [[ ! -e $HOME/apps/src/i3-gaps ]];
+then
+    git clone https://www.github.com/Airblader/i3 $HOME/apps/src/i3-gaps
+    cd $HOME/apps/src/i3-gaps
+    autoreconf --force --install
+    rm -rf build/
+    mkdir -p build && cd build/
+    ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
+    make -j4
+    sudo make install
+    cd
+else
+    echo "i3-gaps seams to be installed on ~/apps/src/i3-gaps. Skipping"
+fi
 
 # i3
-sudo apt-get install -y -q i3 i3blocks i3lock
 cp $GIT_DIR/i3/config $DOT_DIR/i3/config
 ln -sf $DOT_DIR/i3/config $HOME/.config/i3/config
 cp $GIT_DIR/i3/compton.conf $DOT_DIR/i3/compton.conf
@@ -78,22 +92,32 @@ cp $GIT_DIR/scripts/GPU_usage.sh $DOT_DIR/scripts/GPU_usage.sh
 cp $GIT_DIR/scripts/screenlock.sh $DOT_DIR/scripts/screenlock.sh
 
 # font awesome
-cd $DOT_DIR
-wget http://fontawesome.io/assets/font-awesome-4.7.0.zip
-unzip font-awesome-4.7.0.zip
-cd font-awesome-4.7.0/fonts
-mkdir -p $HOME/.fonts
-cp fontawesome-webfont.ttf $HOME/.fonts
+if [[ ! -e $HOME/.fonts/fontawesome-webfont.ttf ]];
+then
+    cd $DOT_DIR
+    wget http://fontawesome.io/assets/font-awesome-4.7.0.zip
+    unzip font-awesome-4.7.0.zip
+    cd font-awesome-4.7.0/fonts
+    mkdir -p $HOME/.fonts
+    cp fontawesome-webfont.ttf $HOME/.fonts
+else
+    echo "Font awesome seams to be installed in ~/.fonts/fontawesome-webfont.ttf. Skipping"
+fi
 
 # font san francisco display
-cd $DOT_DIR
-git clone https://github.com/supermarin/YosemiteSanFranciscoFont.git
-cd YosemiteSanFranciscoFont/
-cp *.ttf $HOME/.fonts
+if [[ ! -e "$HOME/.fonts/System San Francisco Display Bold.ttf" ]];
+then
+    cd $DOT_DIR
+    git clone https://github.com/supermarin/YosemiteSanFranciscoFont.git
+    cd YosemiteSanFranciscoFont/
+    cp *.ttf $HOME/.fonts
+else
+    echo "Font San Francisco Display seams to be installed in ~/.fonts/System San Francisco Display*. Skipping"
+fi
 
 i3-msg restart
 
 # TODO change desktop background
 # TODO multimonitor support for i3lock
 # TODO bash prompt
-# TODO font awesome
+# TODO take a look at media keys
