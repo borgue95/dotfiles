@@ -1,0 +1,138 @@
+
+" VUNDLE CONFIG
+" ------------------------------------------------------------------------------
+
+" Lets configure Vundle
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+" Pluguin for autocompletion (semantic as well)
+Plugin 'https://github.com/Valloric/YouCompleteMe.git'
+" Plugin for autocompletion for Java
+"Plugin 'artur-shaik/vim-javacomplete2'
+" Plugin colorshceme
+Plugin 'morhetz/gruvbox'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+" Put your non-Plugin stuff after this line
+" ------------------------------------------------------------------------------
+
+" PATHOGEN CONFIG
+" ------------------------------------------------------------------------------
+execute pathogen#infect()
+
+
+" PLUGIN CONFIGS
+" ------------------------------------------------------------------------------
+
+" SYNTAX HIGHLIGHTING
+syntax on
+syntax enable
+" 
+" GRUVBOX config
+let g:gruvbox_contrast_dark="soft"
+set background=dark " Setting dark mode
+colorscheme gruvbox
+"
+" SOLARIZED
+"let g:solarized_termcolors=256
+"set t_Co=256
+"set background=dark
+"colorscheme solarized
+
+" YCM config
+let g:ycm_autoclose_preview_window_after_completion=2
+let g:ycm_collect_identifiers_from_tags_files=1
+let g:ycm_seed_identifiers_with_syntax=0
+" Apply YCM FixIt
+map <F9> :YcmCompleter FixIt<CR>
+
+" JAVACOMPLETE2 config
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+
+
+
+" VIM CONFIG
+" ------------------------------------------------------------------------------
+
+" Set .cl type's syntax to .c syntax
+au BufNewFile,BufRead *.cl set filetype=c
+set number
+set t_Co=256
+
+" Set line breaker indicator
+set colorcolumn=81
+
+" Be smart when using tabs ;)
+set smarttab
+
+" 1 tab == 4 spaces
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+
+" Use spaces instead of tabs
+set expandtab
+
+set ai "Auto indent
+set si "Smart indent
+set wrap "Wrap lines
+set tw=120 "Set autowrap
+
+" Ignore case when searching
+set ignorecase
+" Highlight all search pattern matches
+set hlsearch
+" Toggle visibility of search results
+nnoremap <F3> :set hlsearch!<CR>
+
+" Use mouse to move inside vim
+set mouse=a
+
+set scrolloff=5
+
+
+" VIM STATUS BAR
+" ------------------------------------------------------------------------------
+
+"set noruler
+"set laststatus=2
+
+"hi User1 guifg=#ffdad8  guibg=#880c0e
+"hi User2 guifg=#000000  guibg=#F4905C
+"hi User3 guifg=#292b00  guibg=#f4f597
+"hi User4 guifg=#112605  guibg=#aefe7B
+"hi User5 guifg=#051d00  guibg=#7dcc7d
+"hi User7 guifg=#ffffff  guibg=#880c0e gui=bold
+"hi User8 guifg=#ffffff  guibg=#5b7fbb
+"hi User9 guifg=#ffffff  guibg=#810085
+"hi User0 guifg=#ffffff  guibg=#094afe
+
+"set statusline=
+"set statusline+=%7*\[%n]                                  "buffernr
+"set statusline+=%1*\ %<%F\                                "File+path
+"set statusline+=%2*\ %y\                                  "FileType
+"set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
+"set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
+"set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..) 
+"set statusline+=%5*\ %{&spelllang}\%{HighlightSearch()}\  "Spellanguage & Highlight on?
+"set statusline+=%8*\ %=\ row:%l/%L\ (%03p%%)\             "Rownumber/total (%)
+"set statusline+=%9*\ col:%03c\                            "Colnr
+"set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Readonly? Top/bot.
+
+"function! HighlightSearch()
+"    if &hls
+"        return 'H'
+"    else
+"        return ''
+"    endif
+"endfunction
+
