@@ -7,11 +7,23 @@
 # prevent error snowballing
 set -e -o errexit
 
-# MISC
+# DEPENDENCIES
 # xset playerctl amixer not found on Raspbery Pi
-sudo apt-get install -y -q git build-essential libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf automake libxcb-xrm-dev scrot imagemagick xdotool arandr rofi
+if [[ ! -e /proc/device-tree/model ]]; 
+then
+    sudo apt-get install xset playerctl amixer
+fi
+
+# general dependencies
+sudo apt-get install git build-essential scrot imagemagick xdotool arandr rofi wget unzip
+
+# i3-gaps dependencies
+sudo apt-get install -y -qq libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf automake libxcb-xrm-dev
+
+
+# MISC
 mkdir -p $(xdg-user-dir PICTURES)/screen_shots
-PWD=$(pwd)
+GIT_DIR=$(pwd)
 
 # where to put my dot files
 DOT_DIR=$HOME/.mydotfiles
@@ -22,7 +34,7 @@ mkdir -p $DOT_DIR/scripts
 
 # VIM
 sudo apt-get install -y -q vim
-cp $PWD/vim/vimrc $DOT_DIR/vim/vimrc
+cp $GIT_DIR/vim/vimrc $DOT_DIR/vim/vimrc
 mv $HOME/.vimrc $HOME/.vimrc_old
 ln -sf $DOT_DIR/vim/vimrc $HOME/.vimrc
 
@@ -50,22 +62,38 @@ cd
 
 # i3
 sudo apt-get install -y -q i3 i3blocks i3lock
-cp $PWD/i3/config $DOT_DIR/i3/config
+cp $GIT_DIR/i3/config $DOT_DIR/i3/config
 ln -sf $DOT_DIR/i3/config $HOME/.config/i3/config
-cp $PWD/i3/compton.conf $DOT_DIR/i3/compton.conf
-cp $PWD/i3/i3blocks.conf $DOT_DIR/i3/i3blocks.conf
-cp $PWD/i3/rofi.conf $DOT_DIR/i3/rofi.conf
-cp $PWD/i3/i3_init.sh $DOT_DIR/i3/i3_init.sh
+cp $GIT_DIR/i3/compton.conf $DOT_DIR/i3/compton.conf
+cp $GIT_DIR/i3/i3blocks.conf $DOT_DIR/i3/i3blocks.conf
+cp $GIT_DIR/i3/rofi.conf $DOT_DIR/i3/rofi.conf
+cp $GIT_DIR/i3/i3_init.sh $DOT_DIR/i3/i3_init.sh
 
 # scripts for i3blocks and other things
-cp $PWD/scripts/getmyip.sh $DOT_DIR/scripts/getmyip.sh
-cp $PWD/scripts/screenshot_selection.sh $DOT_DIR/scripts/screenshot_selection.sh
-cp $PWD/scripts/screenshot_full.sh $DOT_DIR/scripts/screenshot_full.sh
-cp $PWD/scripts/CPU_usage.sh $DOT_DIR/scripts/CPU_usage.sh
-cp $PWD/scripts/GPU_usage.sh $DOT_DIR/scripts/GPU_usage.sh
-cp $PWD/scripts/screenlock.sh $DOT_DIR/scripts/screenlock.sh
+cp $GIT_DIR/scripts/getmyip.sh $DOT_DIR/scripts/getmyip.sh
+cp $GIT_DIR/scripts/screenshot_selection.sh $DOT_DIR/scripts/screenshot_selection.sh
+cp $GIT_DIR/scripts/screenshot_full.sh $DOT_DIR/scripts/screenshot_full.sh
+cp $GIT_DIR/scripts/CPU_usage.sh $DOT_DIR/scripts/CPU_usage.sh
+cp $GIT_DIR/scripts/GPU_usage.sh $DOT_DIR/scripts/GPU_usage.sh
+cp $GIT_DIR/scripts/screenlock.sh $DOT_DIR/scripts/screenlock.sh
+
+# font awesome
+cd $DOT_DIR
+wget http://fontawesome.io/assets/font-awesome-4.7.0.zip
+unzip font-awesome-4.7.0.zip
+cd font-awesome-4.7.0/fonts
+mkdir -p $HOME/.fonts
+cp fontawesome-webfont.ttf $HOME/.fonts
+
+# font san francisco display
+cd $DOT_DIR
+git clone https://github.com/supermarin/YosemiteSanFranciscoFont.git
+cd YosemiteSanFranciscoFont/
+cp *.ttf $HOME/.fonts
 
 i3-msg restart
 
 # TODO change desktop background
 # TODO multimonitor support for i3lock
+# TODO bash prompt
+# TODO font awesome
