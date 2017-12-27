@@ -13,7 +13,7 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 " Pluguin for autocompletion (semantic as well)
-Plugin 'https://github.com/Valloric/YouCompleteMe.git'
+"Plugin 'https://github.com/Valloric/YouCompleteMe.git'
 " Plugin for autocompletion for Java
 "Plugin 'artur-shaik/vim-javacomplete2'
 " Plugin colorshceme

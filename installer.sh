@@ -8,7 +8,8 @@
 set -e -o errexit
 
 # MISC
-sudo apt-get install -y git scrot imagemagick xset xdotool arandr rofi amixer playerctl autoreconf
+# xset playerctl amixer not found on Raspbery Pi
+sudo apt-get install -y -q git scrot imagemagick xdotool arandr rofi autoconf
 mkdir -p $(xdg-user-dir PICTURES)/screen_shots
 
 # where to put my dot files
@@ -19,16 +20,23 @@ mkdir -p $DOT_DIR/i3
 mkdir -p $DOT_DIR/scripts
 
 # VIM
-sudo apt-get install -y vim
+sudo apt-get install -y -q vim
 cp $(pwd)/vim/vimrc $DOT_DIR/vim/vimrc
-ln -s $DOT_DIR/vim/vimrc $HOME/.vimrc
+mv $HOME/.vimrc $HOME/.vimrc_old
+ln -sf $DOT_DIR/vim/vimrc $HOME/.vimrc
 
 # VIM plugins
+echo "The file ~/.vim/bundle/Vundle.vim is going to be removed. Sure [press enter to continue]?"
+read
+rm -rf $HOME/.vim/bundle/Vundle.vim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
 
 # i3-gaps
 mkdir -p $HOME/apps/src
+echo "The folder ~/apps/src/i3-gaps is going to be removed. Sure [press enter to continue]?"
+read
+rm -rf $HOME/apps/src/i3-gaps
 git clone https://www.github.com/Airblader/i3 $HOME/apps/src/i3-gaps
 cd i3-gaps
 autoreconf --force --install
@@ -40,9 +48,9 @@ sudo make install
 cd
 
 # i3
-sudo apt-get install -y i3 i3blocks i3lock
+sudo apt-get install -y -q i3 i3blocks i3lock
 cp $(pwd)/i3/config $DOT_DIR/i3/config
-ln -s $DOT_DIR/i3/config $HOME/.config/i3/config
+ln -sf $DOT_DIR/i3/config $HOME/.config/i3/config
 cp $(pwd)/i3/compton.conf $DOT_DIR/i3/compton.conf
 cp $(pwd)/i3/i3blocks.conf $DOT_DIR/i3/i3blocks.conf
 cp $(pwd)/i3/rofi.conf $DOT_DIR/i3/rofi.conf
