@@ -9,7 +9,7 @@ set -e -o errexit
 
 # MISC
 # xset playerctl amixer not found on Raspbery Pi
-sudo apt-get install -y -q git scrot imagemagick xdotool arandr rofi autoconf
+sudo apt-get install -y -q git build-essential libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf automake libxcb-xrm-dev scrot imagemagick xdotool arandr rofi
 mkdir -p $(xdg-user-dir PICTURES)/screen_shots
 
 # where to put my dot files
@@ -38,12 +38,12 @@ echo "The folder ~/apps/src/i3-gaps is going to be removed. Sure [press enter to
 read
 rm -rf $HOME/apps/src/i3-gaps
 git clone https://www.github.com/Airblader/i3 $HOME/apps/src/i3-gaps
-cd i3-gaps
+cd $HOME/apps/src/i3-gaps
 autoreconf --force --install
 rm -rf build/
 mkdir -p build && cd build/
 ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
-make
+make -j4
 sudo make install
 cd
 
@@ -63,6 +63,8 @@ cp $(pwd)/scripts/screenshot_full.sh $DOT_DIR/scripts/screenshot_full.sh
 cp $(pwd)/scripts/CPU_usage.sh $DOT_DIR/scripts/CPU_usage.sh
 cp $(pwd)/scripts/GPU_usage.sh $DOT_DIR/scripts/GPU_usage.sh
 cp $(pwd)/scripts/screenlock.sh $DOT_DIR/scripts/screenlock.sh
+
+i3-msg restart
 
 # TODO change desktop background
 # TODO multimonitor support for i3lock
