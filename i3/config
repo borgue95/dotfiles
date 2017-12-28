@@ -42,7 +42,7 @@ font pango:System San Fransisco Display 9
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec mate-terminal
+bindsym $mod+Return exec gnome-terminal
 
 # kill focused window
 bindsym $mod+q kill
