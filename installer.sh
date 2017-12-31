@@ -7,31 +7,72 @@
 # prevent error snowballing
 set -e -o errexit
 
-# DEPENDENCIES
-# playerctl not found on Raspbery Pi
-if [[ ! -e /proc/device-tree/model ]]; 
+# pretty terminal colors for information:
+LBLU=$(tput setaf 12)  # light blue
+LYEL=$(tput setaf 11)  # light yellow
+LGRE=$(tput setaf 10)  # light green
+RST=$(tput sgr0)
+
+
+if [ "$1" == "--install-dependencies" ]; 
 then
-    #sudo apt-get install playerctl
-    echo ""
+    # DEPENDENCIES
+    echo $LBLU"Updating repositories"$RST
+    sudo apt-get update > /dev/null
+
+    # general dependencies
+    echo $LBLU"Installing basic dependencies and desktop utilities"$RST
+    sudo apt-get install -y -qq arandr\
+                                build-essential\
+                                feh\
+                                git\
+                                gnome-terminal\
+                                imagemagick\
+                                lm-sensors\
+                                lxappearance\
+                                rofi\
+                                scrot\
+                                unzip\
+                                vim\
+                                wget\
+                                xdotool > /dev/null
+
+    # i3-gaps dependencies
+    if [[ ! -e /proc/device-tree/model ]];
+    then
+        # if this is not a raspberry pi
+        echo $LYEL"Press enter to continue the installation"$RST
+        sudo add-apt-repository ppa:aguignard/ppa > /dev/null
+        sudo apt-get update > /dev/null
+    fi
+    echo $LBLU"Installing i3-gaps dependencies"$RST
+    sudo apt-get install -y -qq autoconf\
+                                automake\
+                                libev-dev\
+                                libpango1.0-dev\
+                                libstartup-notification0-dev\
+                                libxcb-cursor-dev\
+                                libxcb-icccm4-dev\
+                                libxcb-keysyms1-dev\
+                                libxcb-randr0-dev\
+                                libxcb-util0-dev\
+                                libxcb-xinerama0-dev\
+                                libxcb-xkb-dev\
+                                libxcb-xrm-dev
+                                libxcb1-dev\
+                                libxkbcommon-dev\
+                                libxkbcommon-x11-dev\
+                                libyajl-dev > /dev/null
+
+    # i3 itself
+    echo $LBLU"Installing i3 itself"$RST
+    sudo apt-get install -y -qq i3 i3blocks i3lock > /dev/null
+
 fi
-
-# general dependencies
-sudo apt-get install -y -qq git build-essential scrot imagemagick xdotool arandr rofi wget unzip
-
-# i3-gaps dependencies
-if [[ ! -e /proc/device-tree/model ]];
-then
-    sudo add-apt-repository ppa:aguignard/ppa
-    sudo apt-get update
-fi
-sudo apt-get install -y -qq libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf automake libxcb-xrm-dev
-
-# i3 itself
-sudo apt-get install -y -qq i3 i3blocks i3lock
 
 # MISC
 mkdir -p $(xdg-user-dir PICTURES)/screen_shots
-GIT_DIR=$(pwd)
+GIT_DIR=$(dirname $(realpath $0))
 
 # where to put my dot files
 DOT_DIR=$HOME/.mydotfiles
@@ -41,24 +82,29 @@ mkdir -p $DOT_DIR/i3
 mkdir -p $DOT_DIR/scripts
 
 # VIM
-sudo apt-get install -y -q vim
+echo $LBLU"Installing vimrc. If previous rc file is encountered, it will be saved as .vimrc_old"$RST
 cp $GIT_DIR/vim/vimrc $DOT_DIR/vim/vimrc
-if [[ -e $HOME/.vimrc ]];
+if [[ -e $HOME/.vimrc ]];  # if exists
 then
-    mv $HOME/.vimrc $HOME/.vimrc_old
+    if [[ ! -h $HOME/.vimrc ]];  # if is not a symolic link
+    then
+        mv $HOME/.vimrc $HOME/.vimrc_old
+    fi
 fi
 ln -sf $DOT_DIR/vim/vimrc $HOME/.vimrc
 
 # VIM plugins
+echo $LBLU"Installing VundleVim and some pluggins"$RST
 if [[ ! -e ~/.vim/bundle/Vundle.vim ]];
 then
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     vim +PluginInstall +qall
 else
-    echo "Vundle vim seams to be installed on ~/.vim/bundle/Vundle.vim. Skipping"
+    echo $LYEL"  Vundle vim seams to be installed on ~/.vim/bundle/Vundle.vim. Skipping"$RST
 fi
 
 # i3-gaps
+echo $LBLU"Installing i3-gaps"$RST
 mkdir -p $HOME/apps/src
 if [[ ! -e $HOME/apps/src/i3-gaps ]];
 then
@@ -72,10 +118,11 @@ then
     sudo make install
     cd
 else
-    echo "i3-gaps seams to be installed on ~/apps/src/i3-gaps. Skipping"
+    echo $LYEL"  i3-gaps seams to be installed on ~/apps/src/i3-gaps. Skipping"$RST
 fi
 
 # i3
+echo $LBLU"Installing config files and scripts"$RST
 cp $GIT_DIR/i3/config $DOT_DIR/i3/config
 ln -sf $DOT_DIR/i3/config $HOME/.config/i3/config
 cp $GIT_DIR/i3/compton.conf $DOT_DIR/i3/compton.conf
@@ -92,6 +139,7 @@ cp $GIT_DIR/scripts/GPU_usage.sh $DOT_DIR/scripts/GPU_usage.sh
 cp $GIT_DIR/scripts/screenlock.sh $DOT_DIR/scripts/screenlock.sh
 
 # font awesome
+echo $LBLU"Installing fonts"$RST
 if [[ ! -e $HOME/.fonts/fontawesome-webfont.ttf ]];
 then
     cd $DOT_DIR
@@ -101,7 +149,7 @@ then
     mkdir -p $HOME/.fonts
     cp fontawesome-webfont.ttf $HOME/.fonts
 else
-    echo "Font awesome seams to be installed in ~/.fonts/fontawesome-webfont.ttf. Skipping"
+    echo $LYEL"  Font Awesome seams to be installed in ~/.fonts. Skipping"$RST
 fi
 
 # font san francisco display
@@ -112,10 +160,16 @@ then
     cd YosemiteSanFranciscoFont/
     cp *.ttf $HOME/.fonts
 else
-    echo "Font San Francisco Display seams to be installed in ~/.fonts/System San Francisco Display*. Skipping"
+    echo $LYEL"  Font San Francisco Display seams to be installed in ~/.fonts. Skipping"$RST
 fi
 
-i3-msg restart
+if [ $(ps aux | grep -e i3 | grep -v grep | awk '{print $11}' | grep -e ^i3$) == "i3" ];
+then
+    i3-msg restart
+else
+    echo $LGRE"Log out and re-log in using i3 to enjoy your productivity"
+fi
+
 
 # TODO change desktop background
 # TODO multimonitor support for i3lock
