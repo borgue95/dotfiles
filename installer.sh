@@ -58,7 +58,7 @@ then
                                 libxcb-util0-dev\
                                 libxcb-xinerama0-dev\
                                 libxcb-xkb-dev\
-                                libxcb-xrm-dev
+                                libxcb-xrm-dev\
                                 libxcb1-dev\
                                 libxkbcommon-dev\
                                 libxkbcommon-x11-dev\
@@ -68,10 +68,48 @@ then
     echo $LBLU"Installing i3 itself"$RST
     sudo apt-get install -y -qq i3 i3blocks i3lock > /dev/null
 
+    # arc theme
+    if [[ -e /proc/device-tree/model ]]; # raspberry pi
+    then
+        wget -nv https://download.opensuse.org/repositories/home:Horst3180/Debian_8.0/Release.key -O Release.key
+        sudo apt-key add - < Release.key
+        sudo apt-get update
+        sudo echo 'deb http://download.opensuse.org/repositories/home:/Horst3180/Debian_8.0/ /' > /etc/apt/sources.list.d/arc-theme.list
+        sudo apt-get update
+        sudo apt-get install arc-theme
+    else
+        wget -nv https://download.opensuse.org/repositories/home:Horst3180/xUbuntu_16.04/Release.key -O Release.key
+        sudo apt-key add - < Release.key
+        sudo apt-get update
+        sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/Horst3180/xUbuntu_16.04/ /' > /etc/apt/sources.list.d/arc-theme.list"
+        sudo apt-get update
+        sudo apt-get install arc-theme
+    fi
+    echo $LYEL"  After the installation, open lxappearance and change the theme"$RST
+
+    # paper icons
+    if [[ -e /proc/device-tree/model ]]; # raspberry pi
+    then
+        wget 'https://snwh.org/paper/download.php?owner=snwh&ppa=pulp&pkg=paper-icon-theme,16.04' -O icon-theme.deb
+        wget 'https://snwh.org/paper/download.php?owner=snwh&ppa=pulp&pkg=paper-gtk-theme,16.04' -O paper-theme.deb
+        sudo dpkg -i icon-theme.deb
+        sudo dpkg -i paper-theme.deb
+    else
+        sudo add-apt-repository ppa:snwh/pulp < \n
+        sudo apt-get update
+        sudo apt-get install paper-icon-theme
+        sudo apt-get install paper-cursor-theme
+        sudo apt-get install paper-gtk-theme
+    fi
+    echo $LYEL"  After the installation, open lxappearance and change the icons"$RST
+
+    
+
 fi
 
 # MISC
 mkdir -p $(xdg-user-dir PICTURES)/screen_shots
+mkdir -p .config/i3/
 GIT_DIR=$(dirname $(realpath $0))
 
 # where to put my dot files
@@ -136,6 +174,7 @@ cp $GIT_DIR/scripts/screenshot_selection.sh $DOT_DIR/scripts/screenshot_selectio
 cp $GIT_DIR/scripts/screenshot_full.sh $DOT_DIR/scripts/screenshot_full.sh
 cp $GIT_DIR/scripts/CPU_usage.sh $DOT_DIR/scripts/CPU_usage.sh
 cp $GIT_DIR/scripts/GPU_usage.sh $DOT_DIR/scripts/GPU_usage.sh
+cp $GIT_DIR/scripts/MEM_usage.sh $DOT_DIR/scripts/MEM_usage.sh
 cp $GIT_DIR/scripts/screenlock.sh $DOT_DIR/scripts/screenlock.sh
 
 # font awesome
@@ -163,12 +202,17 @@ else
     echo $LYEL"  Font San Francisco Display seams to be installed in ~/.fonts. Skipping"$RST
 fi
 
-if [ $(ps aux | grep -e i3 | grep -v grep | awk '{print $11}' | grep -e ^i3$) == "i3" ];
+if [ "$(ps aux | grep -e i3 | grep -v grep | awk '{print $11}' | grep -e ^i3$)" == "i3" ];
 then
     i3-msg restart
 else
     echo $LGRE"Log out and re-log in using i3 to enjoy your productivity"
 fi
+
+echo 
+echo $LBLU"In order to get the screens work, log in into i3, execute the program arandr,"
+echo "arrange the displays and save the configuration in the predefined folder with"
+echo "the name 'myscreenlayout.sh'. Then, log out and log in again."$RST
 
 
 # TODO change desktop background
