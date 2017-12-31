@@ -18,7 +18,7 @@ if [ "$1" == "--install-dependencies" ];
 then
     # DEPENDENCIES
     echo $LBLU"Updating repositories"$RST
-    sudo apt-get update > /dev/null
+    sudo apt-get update &> /dev/null
 
     # general dependencies
     echo $LBLU"Installing basic dependencies and desktop utilities"$RST
@@ -69,39 +69,42 @@ then
     sudo apt-get install -y -qq i3 i3blocks i3lock > /dev/null
 
     # arc theme
+    echo $LBLU"Installing arc theme"$RST
     if [[ -e /proc/device-tree/model ]]; # raspberry pi
     then
         wget -nv https://download.opensuse.org/repositories/home:Horst3180/Debian_8.0/Release.key -O Release.key
-        sudo apt-key add - < Release.key
-        sudo apt-get update
-        sudo echo 'deb http://download.opensuse.org/repositories/home:/Horst3180/Debian_8.0/ /' > /etc/apt/sources.list.d/arc-theme.list
-        sudo apt-get update
-        sudo apt-get install arc-theme
+        sudo apt-key add - < Release.key > /dev/null
+        sudo apt-get update &> /dev/null
+        sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/Horst3180/Debian_8.0/ /' > /etc/apt/sources.list.d/arc-theme.list" > /dev/null
+        sudo apt-get update &> /dev/null
+        sudo apt-get install -y -qq --allow-unauthenticated arc-theme > /dev/null
     else
         wget -nv https://download.opensuse.org/repositories/home:Horst3180/xUbuntu_16.04/Release.key -O Release.key
         sudo apt-key add - < Release.key
-        sudo apt-get update
+        sudo apt-get update &> /dev/null
         sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/Horst3180/xUbuntu_16.04/ /' > /etc/apt/sources.list.d/arc-theme.list"
-        sudo apt-get update
-        sudo apt-get install arc-theme
+        sudo apt-get update &> /dev/null
+        sudo apt-get install -y -qq --allow-unauthenticated arc-theme > /dev/null
     fi
-    echo $LYEL"  After the installation, open lxappearance and change the theme"$RST
 
     # paper icons
+    echo $LBLU"Installing paper icons theme"$RST
     if [[ -e /proc/device-tree/model ]]; # raspberry pi
     then
-        wget 'https://snwh.org/paper/download.php?owner=snwh&ppa=pulp&pkg=paper-icon-theme,16.04' -O icon-theme.deb
-        wget 'https://snwh.org/paper/download.php?owner=snwh&ppa=pulp&pkg=paper-gtk-theme,16.04' -O paper-theme.deb
-        sudo dpkg -i icon-theme.deb
-        sudo dpkg -i paper-theme.deb
+        wget 'https://snwh.org/paper/download.php?owner=snwh&ppa=pulp&pkg=paper-icon-theme,16.04' -O icon-theme.deb &> /dev/null
+        wget 'https://snwh.org/paper/download.php?owner=snwh&ppa=pulp&pkg=paper-gtk-theme,16.04' -O paper-theme.deb &> /dev/null
+        sudo dpkg -i icon-theme.deb &> /dev/null
+        sudo dpkg -i paper-theme.deb &> /dev/null
+        rm icon-theme.deb
+        rm paper-theme.deb
     else
-        sudo add-apt-repository ppa:snwh/pulp < \n
-        sudo apt-get update
-        sudo apt-get install paper-icon-theme
-        sudo apt-get install paper-cursor-theme
-        sudo apt-get install paper-gtk-theme
+        sudo add-apt-repository ppa:snwh/pulp < \n &> /dev/null
+        sudo apt-get update &> /dev/null
+        sudo apt-get install -y -qq paper-icon-theme\
+                                    paper-cursor-theme\
+                                    paper-gtk-theme > /dev/null
     fi
-    echo $LYEL"  After the installation, open lxappearance and change the icons"$RST
+    echo $LYEL"  After the installation, open lxappearance and change the theme and the icons"$RST
 
     
 
