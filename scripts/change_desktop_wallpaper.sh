@@ -11,33 +11,35 @@ then
 else
     if [ "$1" == "make_dark" ];
     then
-        dark_color=$(cat points.txt | head -n 2 | tail -n 1)
-        semi_dark_color=$(cat points.txt | head -n 5 | tail -n 1)
-        light_color=$(cat points.txt | head -n 8 | tail -n 1)
+        dark_color=$(cat $BASE_DIR/points.txt | head -n 2 | tail -n 1)
+        semi_dark_color=$(cat $BASE_DIR/points.txt | head -n 5 | tail -n 1)
+        light_color=$(cat $BASE_DIR/points.txt | head -n 8 | tail -n 1)
         wallpaper=$(cat $BASE_DIR/last_wallpaper)
     elif [ "$1" == "make_bright" ];
     then
-        dark_color=$(cat points.txt | head -n 4 | tail -n 1)
-        semi_dark_color=$(cat points.txt | head -n 7 | tail -n 1)
-        light_color=$(cat points.txt | head -n 10 | tail -n 1)
+        dark_color=$(cat $BASE_DIR/points.txt | head -n 4 | tail -n 1)
+        semi_dark_color=$(cat $BASE_DIR/points.txt | head -n 7 | tail -n 1)
+        light_color=$(cat $BASE_DIR/points.txt | head -n 10 | tail -n 1)
         wallpaper=$(cat $BASE_DIR/last_wallpaper)
     elif [ "$1" == "make_normal" ];
     then
-        dark_color=$(cat points.txt | head -n 3 | tail -n 1)
-        semi_dark_color=$(cat points.txt | head -n 6 | tail -n 1)
-        light_color=$(cat points.txt | head -n 9 | tail -n 1)
+        dark_color=$(cat $BASE_DIR/points.txt | head -n 3 | tail -n 1)
+        semi_dark_color=$(cat $BASE_DIR/points.txt | head -n 6 | tail -n 1)
+        light_color=$(cat $BASE_DIR/points.txt | head -n 9 | tail -n 1)
         wallpaper=$(cat $BASE_DIR/last_wallpaper)
     elif [ "$1" == "make_contrast" ];
     then
-        dark_color=$(cat points.txt | head -n 1 | tail -n 1)
-        semi_dark_color=$(cat points.txt | head -n 5 | tail -n 1)
-        light_color=$(cat points.txt | head -n 10 | tail -n 1)
+        dark_color=$(cat $BASE_DIR/points.txt | head -n 1 | tail -n 1)
+        semi_dark_color=$(cat $BASE_DIR/points.txt | head -n 5 | tail -n 1)
+        light_color=$(cat $BASE_DIR/points.txt | head -n 10 | tail -n 1)
         wallpaper=$(cat $BASE_DIR/last_wallpaper)
     else
         $BASE_DIR/image_kmeans/main $1 10
-        dark_color=$(cat points.txt | head -n 3 | tail -n 1)
-        semi_dark_color=$(cat points.txt | head -n 6 | tail -n 1)
-        light_color=$(cat points.txt | head -n 9 | tail -n 1)
+        mv out.png $BASE_DIR/out.png
+        mv points.txt $BASE_DIR/points.txt
+        dark_color=$(cat $BASE_DIR/points.txt | head -n 3 | tail -n 1)
+        semi_dark_color=$(cat $BASE_DIR/points.txt | head -n 6 | tail -n 1)
+        light_color=$(cat $BASE_DIR/points.txt | head -n 9 | tail -n 1)
         wallpaper=$1
     fi
 fi
@@ -64,7 +66,7 @@ cp $config_i3blocks_file $local_i3blocks_config
 
 # change background
 feh --bg-scale "$wallpaper" --bg-scale "$wallpaper"
-echo "$wallpaper" > last_wallpaper
+echo "$wallpaper" > $BASE_IDR/last_wallpaper
 
 # output is 'config' file. refresh i3
 i3-msg restart
