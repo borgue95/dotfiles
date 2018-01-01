@@ -98,7 +98,8 @@ then
         rm icon-theme.deb
         rm paper-theme.deb
     else
-        sudo add-apt-repository ppa:snwh/pulp < \n &> /dev/null
+        echo $LYEL"Press enter to continue the installation"$RST
+        sudo add-apt-repository ppa:snwh/pulp > /dev/null
         sudo apt-get update &> /dev/null
         sudo apt-get install -y -qq paper-icon-theme\
                                     paper-cursor-theme\
@@ -172,13 +173,16 @@ cp $GIT_DIR/i3/rofi.conf $DOT_DIR/i3/rofi.conf
 cp $GIT_DIR/i3/i3_init.sh $DOT_DIR/i3/i3_init.sh
 
 # scripts for i3blocks and other things
-cp $GIT_DIR/scripts/getmyip.sh $DOT_DIR/scripts/getmyip.sh
-cp $GIT_DIR/scripts/screenshot_selection.sh $DOT_DIR/scripts/screenshot_selection.sh
-cp $GIT_DIR/scripts/screenshot_full.sh $DOT_DIR/scripts/screenshot_full.sh
-cp $GIT_DIR/scripts/CPU_usage.sh $DOT_DIR/scripts/CPU_usage.sh
-cp $GIT_DIR/scripts/GPU_usage.sh $DOT_DIR/scripts/GPU_usage.sh
-cp $GIT_DIR/scripts/MEM_usage.sh $DOT_DIR/scripts/MEM_usage.sh
-cp $GIT_DIR/scripts/screenlock.sh $DOT_DIR/scripts/screenlock.sh
+#cp $GIT_DIR/scripts/getmyip.sh $DOT_DIR/scripts/getmyip.sh
+#cp $GIT_DIR/scripts/screenshot_selection.sh $DOT_DIR/scripts/screenshot_selection.sh
+#cp $GIT_DIR/scripts/screenshot_full.sh $DOT_DIR/scripts/screenshot_full.sh
+#cp $GIT_DIR/scripts/CPU_usage.sh $DOT_DIR/scripts/CPU_usage.sh
+#cp $GIT_DIR/scripts/GPU_usage.sh $DOT_DIR/scripts/GPU_usage.sh
+#cp $GIT_DIR/scripts/MEM_usage.sh $DOT_DIR/scripts/MEM_usage.sh
+#cp $GIT_DIR/scripts/screenlock.sh $DOT_DIR/scripts/screenlock.sh
+#cp $GIT_DIR/scripts/lock.png $DOT_DIR/scripts/lock.png
+#cp $GIT_DIR/scripts/lock2.png $DOT_DIR/scripts/lock2.png
+cp -R $GIT_DIR/scripts/* $DOT_DIR/scripts
 
 # font awesome
 echo $LBLU"Installing fonts"$RST

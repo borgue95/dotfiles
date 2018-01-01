@@ -58,15 +58,14 @@ cpu_usage=$(echo "scale=6; ($total_load - $idle_load) / $total_load * 100.0" | b
 cpu_usage=$(echo "scale=1; $cpu_usage / 1.0" | bc | awk '{printf("%.1f", $0)}')
 cpu_usage="$cpu_usage"
 
-if [ "$(echo "scale=2;$cpu_usage > 75.0 && $cpu_usage < 95.0" | bc -l)" -eq 1 ]; then
+if [ "$(echo "scale=2;$cpu_usage > 75.0 && $cpu_usage < 95.0" | bc -l)" -eq 1 ]; then # 75-95
     output="<span foreground=\"#FFFC00\"><b>$cpu_usage%</b></span>"
     echo -n $output
     echo " @ $freq, $temp1"
-elif [ "$(echo "scale=2;$cpu_usage >= 95.0" | bc -l)" -eq 1 ]; then
-    output="<span background=\"#FF0000\"><b> $cpu_usage% </b></span>"
+elif [ "$(echo "scale=2;$cpu_usage >= 95.0" | bc -l)" -eq 1 ]; then # > 95
+    output="<span background=\"#FF0000\" foreground=\"#FFFFFF\"><b> $cpu_usage% </b></span>"
     echo -n $output
     echo " @ $freq, $temp1"
-else
-    echo "$cpu_usage""% @ $freq, $temp1"
+else # < 75
     echo "$cpu_usage""% @ $freq, $temp1"
 fi

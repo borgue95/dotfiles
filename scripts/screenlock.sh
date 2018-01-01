@@ -1,19 +1,20 @@
 #!/bin/bash
 
 # requires imagemagick and i3lock
+DIR=$(dirname $(realpath $0))
 
 # sreenshot
-import -window root tmp.png
+import -window root $DIR/tmp.png
 
 # blur
-convert tmp.png -blur 0x4 tmp.png
+convert $DIR/tmp.png -blur 21x10 $DIR/tmp.png
 
 # ovelay
-composite -gravity center lock.png tmp.png tmp.png
+composite -gravity center $DIR/lock.png $DIR/tmp.png $DIR/tmp.png
 
 # lock
-i3lock -e -i tmp.png
+i3lock -e -i $DIR/tmp.png
 
 # cleanup
-rm tmp.png
+rm $DIR/tmp.png
 

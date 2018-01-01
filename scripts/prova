@@ -11,10 +11,10 @@
 
 set $mod Mod4
 
-set $bg-color #2b5258
-set $inactive-bg-color #2b5258
-set $text-color #88aeb5
-set $inactive-text-color #4e777d
+set $bg-color #4d6b4e
+set $inactive-bg-color #4d6b4e
+set $text-color #9fb298
+set $inactive-text-color #6d9386
 set $urgent-bg-color      #e53935
 set $indicator            #123456
 
@@ -267,7 +267,7 @@ bar {
     font pango:DejaVu Sans Mono, FontAwesome 11
     colors{
         background $bg-color
-        separator  $text-color
+        separator  $bbbeb3
         #                  border             background         text
         active_workspace   $inactive-bg-color $inactive-bg-color $inactive-text-color
         focused_workspace  $bg-color          $bg-color          $text-color
