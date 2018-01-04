@@ -22,7 +22,7 @@ call vundle#end()            " required
 
 " PATHOGEN CONFIG
 " ------------------------------------------------------------------------------
-execute pathogen#infect()
+"execute pathogen#infect()
 " ------------------------------------------------------------------------------
 
 filetype plugin on
@@ -98,19 +98,22 @@ vnoremap <Space><Tab> <Esc>/<++><Enter>
 inoremap ;gui <++>
 
 " Compilation
-map <F5> :!w<Enter>:!pdflatex <C-r>%<Enter>
+map <F5> :!w<Enter>:!pdflatex <C-r>%<Enter><Enter>
 
 " Shortcuts
-autocmd FileType tex inoremap ;bf \textbf{}<Space><++><Esc>T{i
+autocmd FileType tex inoremap ;bf \textbf{}<++><Esc>T{i
+autocmd FileType tex inoremap ;tt \texttt{}<++><Esc>T{i
+autocmd FileType tex inoremap ;it \textit{}<++><Esc>T{i
+autocmd FileType tex inoremap ;sec \section{}<Enter><Enter><++><Esc>2k0f{a
+autocmd FileType tex inoremap ;ssec \subsection{}<Enter><Enter><++><Esc>2k0f{a
+autocmd FileType tex inoremap ;sssec \subsubsection{}<Enter><Enter><++><Esc>2k0f{a
 autocmd FileType tex inoremap ;tt \texttt{}<Space><++><Esc>T{i
 autocmd FileType tex inoremap ;en \begin{enumerate}<Enter><Enter>\end{enumerate}<Enter><Enter><++><Esc>3kA
-autocmd FileType tex inoremap ;it \begin{itemize}<Enter><Enter>\end{itemize}<Enter><Enter><++><Esc>3kA
+autocmd FileType tex inoremap ;po \begin{itemize}<Enter><Enter>\end{itemize}<Enter><Enter><++><Esc>3kA
 autocmd FileType tex inoremap ;im \begin{figure}<Enter>\centering<Enter>\includegraphics[]{<++>}<Enter>\caption{<++>\label{<++>}}<Enter>\end{figure}<Enter><Enter><++><Esc>4k0<Esc>f[a
 
 
 " C/C++ MACROS
-
-
 
 " VIM STATUS BAR
 " ------------------------------------------------------------------------------
