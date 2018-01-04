@@ -1,8 +1,6 @@
 
 " VUNDLE CONFIG
 " ------------------------------------------------------------------------------
-
-" Lets configure Vundle
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -20,40 +18,36 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'morhetz/gruvbox'
 
 call vundle#end()            " required
-filetype plugin indent on    " required
-" Put your non-Plugin stuff after this line
 " ------------------------------------------------------------------------------
 
+" PATHOGEN CONFIG
+" ------------------------------------------------------------------------------
+execute pathogen#infect()
+" ------------------------------------------------------------------------------
+
+filetype plugin on
+"filetype plugin indent on
 
 " PLUGIN CONFIGS
 " ------------------------------------------------------------------------------
-
 " SYNTAX HIGHLIGHTING
 syntax on
 syntax enable
-" 
+ 
 " GRUVBOX config
 let g:gruvbox_contrast_dark="soft"
 set background=dark " Setting dark mode
 colorscheme gruvbox
-"
-" SOLARIZED
-"let g:solarized_termcolors=256
-"set t_Co=256
-"set background=dark
-"colorscheme solarized
 
 " YCM config
-let g:ycm_autoclose_preview_window_after_completion=2
-let g:ycm_collect_identifiers_from_tags_files=1
-let g:ycm_seed_identifiers_with_syntax=0
+"let g:ycm_autoclose_preview_window_after_completion=2
+"let g:ycm_collect_identifiers_from_tags_files=1
+"let g:ycm_seed_identifiers_with_syntax=0
 " Apply YCM FixIt
-map <F9> :YcmCompleter FixIt<CR>
+"map <F9> :YcmCompleter FixIt<CR>
 
 " JAVACOMPLETE2 config
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
-
-
+"autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 
 " VIM CONFIG
@@ -61,11 +55,11 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 " Set .cl type's syntax to .c syntax
 au BufNewFile,BufRead *.cl set filetype=c
-set number
+set number relativenumber
 set t_Co=256
 
 " Set line breaker indicator
-set colorcolumn=81
+set colorcolumn=80,120
 
 " Be smart when using tabs ;)
 set smarttab
@@ -81,7 +75,7 @@ set expandtab
 set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
-set tw=120 "Set autowrap
+"set tw=120 "Set autowrap
 
 " Ignore case when searching
 set ignorecase
@@ -94,6 +88,28 @@ nnoremap <F3> :set hlsearch!<CR>
 set mouse=a
 
 set scrolloff=5
+
+" LATEX MACROS
+
+" Navigation
+inoremap <Space><Tab> <Esc>/<++><Enter>"_ca<
+vnoremap <Space><Tab> <Esc>/<++><Enter>
+"map <Space><Tab> <Esc>/<++><Enter>ca<
+inoremap ;gui <++>
+
+" Compilation
+map <F5> :!w<Enter>:!pdflatex <C-r>%<Enter>
+
+" Shortcuts
+autocmd FileType tex inoremap ;bf \textbf{}<Space><++><Esc>T{i
+autocmd FileType tex inoremap ;tt \texttt{}<Space><++><Esc>T{i
+autocmd FileType tex inoremap ;en \begin{enumerate}<Enter><Enter>\end{enumerate}<Enter><Enter><++><Esc>3kA
+autocmd FileType tex inoremap ;it \begin{itemize}<Enter><Enter>\end{itemize}<Enter><Enter><++><Esc>3kA
+autocmd FileType tex inoremap ;im \begin{figure}<Enter>\centering<Enter>\includegraphics[]{<++>}<Enter>\caption{<++>\label{<++>}}<Enter>\end{figure}<Enter><Enter><++><Esc>4k0<Esc>f[a
+
+
+" C/C++ MACROS
+
 
 
 " VIM STATUS BAR

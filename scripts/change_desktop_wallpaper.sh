@@ -40,7 +40,7 @@ else
         dark_color=$(cat $BASE_DIR/points.txt | head -n 3 | tail -n 1)
         semi_dark_color=$(cat $BASE_DIR/points.txt | head -n 6 | tail -n 1)
         light_color=$(cat $BASE_DIR/points.txt | head -n 9 | tail -n 1)
-        wallpaper=$1
+        wallpaper=$(realpath $1)
     fi
 fi
 
