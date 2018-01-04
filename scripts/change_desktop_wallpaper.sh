@@ -2,6 +2,7 @@
 
 # script real location
 BASE_DIR=$(dirname $(realpath $0))
+echo $BASE_DIR
 
 # get colors
 if [ -z $1 ]
