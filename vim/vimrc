@@ -25,8 +25,9 @@ call vundle#end()            " required
 "execute pathogen#infect()
 " ------------------------------------------------------------------------------
 
+filetype on
 filetype plugin on
-"filetype plugin indent on
+filetype plugin indent on
 
 " PLUGIN CONFIGS
 " ------------------------------------------------------------------------------
@@ -57,6 +58,12 @@ colorscheme gruvbox
 au BufNewFile,BufRead *.cl set filetype=c
 set number relativenumber
 set t_Co=256
+
+" Split config
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-h> <C-w>h
+map <C-l> <C-w>l
 
 " Set line breaker indicator
 set colorcolumn=80,120

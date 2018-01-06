@@ -2,16 +2,16 @@
 set $mod Mod4
 
 # this lines are modified when the wallpaper is changed
-set $bg-color #2b5258
-set $inactive-bg-color #2b5258
-set $text-color #88aeb5
-set $inactive-text-color #4e777d
+set $bg-color #647779
+set $inactive-bg-color #647779
+set $text-color #c2c4b7
+set $inactive-text-color #839191
 set $urgent-bg-color      #e53935
 set $indicator            #123456
 
 # set the location of my scripts and some usefull variables
-set $CONFIGS ~/.mydotfiles/i3
-set $SCRIPTS ~/.mydotfiles/scripts
+set $CONFIGS ~/.config/i3
+set $SCRIPTS ~/.config/i3/scripts
 set $term gnome-terminal
 
 # i3 SPECIFIC -----------------------------------------------------------------
@@ -99,7 +99,7 @@ bindsym $mod+F12 exec bash $SCRIPTS/screenlock.sh
 
 # programes
 #bindsym $mod+c exec caja
-bindsym $mod+c exec $term -e ranger
+bindsym $mod+c exec urxvt -e ranger
 bindsym $mod+g exec firefox
 
 exec --no-startup-id bash $CONFIGS/i3_init.sh
