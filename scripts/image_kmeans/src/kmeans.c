@@ -63,22 +63,23 @@ float distance2D(struct point2D p, struct point2D q) {
  */
 struct point3D *kmeans3D(struct point3D *list_of_points, size_t size, size_t k)
 {
-    size_t i, j, l;
+    size_t l;
 
     // pick k random points from the list
     srand(time(NULL));
     struct point3D *centroids = (struct point3D *) malloc(sizeof(struct point3D) * k);
-    for (i = 0; i < k; i++) {
+    for (size_t i = 0; i < k; i++) {
         centroids[i] = list_of_points[rand() % size];
     }
 
-    size_t iterations = 10;
-    for (l = 0; l < iterations; l++) {
+    size_t iterations = 15;
+#pragma omp parallel
+    while (l < iterations) {
 
+#pragma omp for
         // compute the euclidian distance to all centroids for all points
-#pragma omp parallel for private(j)
-        for (i = 0; i < size; i++) { // for all points
-            for (j = 0; j < k; j++) { // for all centroids
+        for (size_t i = 0; i < size; i++) { // for all points
+            for (size_t j = 0; j < k; j++) { // for all centroids
                 float d = distance3D(list_of_points[i],centroids[j]);
                 if (d < list_of_points[i].distance) {
                     list_of_points[i].distance = d;
@@ -88,7 +89,7 @@ struct point3D *kmeans3D(struct point3D *list_of_points, size_t size, size_t k)
         }
 
         // move centroid
-        for (j = 0; j < k; j++) { // for each centroid, move it
+        for (size_t j = 0; j < k; j++) { // for each centroid, move it
 
             // 3D
             float sumx = 0;
@@ -97,7 +98,7 @@ struct point3D *kmeans3D(struct point3D *list_of_points, size_t size, size_t k)
             int count = 0;
 
             // iterate only with the points in that group (j)
-            for (i = 0; i < size; i++) { // for each point
+            for (size_t i = 0; i < size; i++) { // for each point
                 if (list_of_points[i].group == j) {
                     sumx += list_of_points[i].x;
                     sumy += list_of_points[i].y;
@@ -110,6 +111,10 @@ struct point3D *kmeans3D(struct point3D *list_of_points, size_t size, size_t k)
             centroids[j].x = sumx / count;
             centroids[j].y = sumy / count;
             centroids[j].z = sumz / count;
+        }
+#pragma omp single
+        {
+            l++;
         }
     }
     return centroids;

@@ -44,12 +44,10 @@ else
     fi
 fi
 
-
-config_file="$BASE_DIR/../config"
-#config_file="$HOME/Documents/dotfiles/i3/config"
-
-i3blocks_config_file="$BASE_DIR/../i3blocks.conf"
-#config_i3blocks_file="$HOME/Documents/dotfiles/i3/i3blocks.conf"
+# this refers to the git directory structure because all is done via symlinks
+config_file="$BASE_DIR/../i3/config"
+i3blocks_config_file="$BASE_DIR/../i3/i3blocks.conf"
+tmp_file="$BASE_DIR/tmp"
 
 if [ -e $config_file ] && [ -e $i3blocks_config_file ];
 then
@@ -57,16 +55,12 @@ then
     sed -e s/^.*'set $bg-color'.*$/"set \$bg-color $dark_color"/ \
         -e s/^.*'set $inactive-bg-color'.*$/"set \$inactive-bg-color $dark_color"/ \
         -e s/^.*'set $text-color'.*$/"set \$text-color $light_color"/ \
-        -e s/^.*'set $inactive-text-color'.*$/"set \$inactive-text-color $semi_dark_color"/ $config_file > $config_file
-    ## i make this copy because: 
-    ## I will call this script to change the background image. This will write to the 
-    ## machines config, not to the git config. If i write to the git config, i will 
-    ## need to do bash installer.sh in order to take effect. 
-    #cp $config_file $local_config
+        -e s/^.*'set $inactive-text-color'.*$/"set \$inactive-text-color $semi_dark_color"/ \
+        $config_file > $tmp_file
+    mv $tmp_file $config_file
 
-    sed -e s/"^color=....... #touch.*$"/"color=$light_color #touch"/g $i3blocks_config_file > $i3blocks_config_file
-    #cp $config_i3blocks_file $local_i3blocks_config
-
+    sed -e s/"^color=....... #touch.*$"/"color=$light_color #touch"/g $i3blocks_config_file > $tmp_file
+    mv $tmp_file $i3blocks_config_file
 fi
 
 # change background

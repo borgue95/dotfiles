@@ -76,7 +76,7 @@ ln -sf $GIT_DIR/scripts/CPU_usage.sh $DOT_DIR/scripts/CPU_usage.sh
 ln -sf $GIT_DIR/scripts/GPU_usage.sh $DOT_DIR/scripts/GPU_usage.sh
 ln -sf $GIT_DIR/scripts/MEM_usage.sh $DOT_DIR/scripts/MEM_usage.sh
 ln -sf $GIT_DIR/scripts/screenlock.sh $DOT_DIR/scripts/screenlock.sh
-ln -sf $GIT_DIR/scripts/change_desktop_wallpaper.sh $DOT_DIR/scripts/change_desktop_wallpeper.sh
+ln -sf $GIT_DIR/scripts/change_desktop_wallpaper.sh $DOT_DIR/scripts/change_desktop_wallpaper.sh
 ln -sf $GIT_DIR/scripts/lock.png $DOT_DIR/scripts/lock.png
 ln -sf $GIT_DIR/scripts/lock2.png $DOT_DIR/scripts/lock2.png
 
