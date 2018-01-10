@@ -2,19 +2,28 @@
 
 # requires imagemagick and i3lock
 DIR=$(dirname $(realpath $0))
+LOCK=$DIR/lock2.png
+TMP=$DIR/tmp.png
 
 # sreenshot
-import -window root $DIR/tmp.png
+import -window root $TMP
 
 # blur
-convert $DIR/tmp.png -blur 21x10 $DIR/tmp.png
+convert $TMP -blur 21x10 $TMP
+
+# pixelate
+#convert $TMP -scale 10% -scale 1000% $TMP
+
+# offset (for multi-display setups. put the image at the center of 1 screen
+x=$((960 - $(identify -format '%w' $LOCK)/2))
+y=$((540 - $(identify -format '%h' $LOCK)/2))
 
 # ovelay
-composite -gravity center $DIR/lock.png $DIR/tmp.png $DIR/tmp.png
+composite -geometry +$x+$y $LOCK $TMP $TMP
 
 # lock
-i3lock -e -i $DIR/tmp.png
+i3lock -e -i $TMP
 
 # cleanup
-rm $DIR/tmp.png
+rm $TMP
 
