@@ -12,7 +12,35 @@ set $indicator            #123456
 # set the location of my scripts and some usefull variables
 set $CONFIGS ~/.config/i3
 set $SCRIPTS ~/.config/i3/scripts
-set $term gnome-terminal
+set $term urxvt
+
+# BINDSYMS FOR PROGRAMS -------------------------------------------------------
+
+# start a terminal
+bindsym $mod+Return exec $term
+
+# TODO mirar com coi funciona bé el rofi
+#bindsym $mod+d exec rofi -show run -config $CONFIGS/rofi.conf -fullscreen -font "System San Francisco Display 16"
+#bindsym $mod+d exec rofi -show run -lines 10 -padding 380 -opacity 85 -bg "$bg-color" -fg "$text-color" -bgalt "$bg-color" -hlbg "#6c7893" -hlfg "#f9fafb" -width 1920 -font "System San Francisco Display 16"
+bindsym $mod+d exec rofi -show run -lines 10 -opacity 85 -bg "$bg-color" -fg "$text-color" -bgalt "$bg-color" -hlbg "$inactive-text-color" -hlfg "#f9fafb" -width 1000 -font "System San Francisco Display 16"
+
+# lock
+bindsym $mod+F12 exec bash $SCRIPTS/screenlock.sh
+
+# programes
+#bindsym $mod+c exec caja
+bindsym $mod+c exec $term -e ranger
+bindsym $mod+g exec firefox
+
+exec --no-startup-id bash $CONFIGS/i3_init.sh
+
+exec_always --no-startup-id compton --config $CONFIGS/compton.conf
+
+# install scrot...
+bindsym Print exec --no-startup-id scrot -u '%Y%m%d_%H%M%S.png' -e 'mv $f ~/Imatges/screen_shots/'
+# install imagemagick...
+bindsym $mod+Print exec --no-startup-id bash $SCRIPTS/screenshot_full.sh
+bindsym --release $mod+Shift+Print exec --no-startup-id $SCRIPTS/screenshot_selection.sh
 
 # i3 SPECIFIC -----------------------------------------------------------------
 
@@ -83,34 +111,6 @@ bindsym $mod+Shift+t gaps inner current set $inner; gaps outer current set $oute
 bindsym $mod+Shift+d gaps inner current set 0; gaps outer current set 0
 bindsym $mod+Shift+o gaps inner current plus 5
 bindsym $mod+Shift+i gaps inner current minus 5
-
-# BINDSYMS FOR PROGRAMS -------------------------------------------------------
-
-# start a terminal
-bindsym $mod+Return exec $term
-
-# TODO mirar com coi funciona bé el rofi
-#bindsym $mod+d exec rofi -show run -config $CONFIGS/rofi.conf -fullscreen -font "System San Francisco Display 16"
-#bindsym $mod+d exec rofi -show run -lines 10 -padding 380 -opacity 85 -bg "$bg-color" -fg "$text-color" -bgalt "$bg-color" -hlbg "#6c7893" -hlfg "#f9fafb" -width 1920 -font "System San Francisco Display 16"
-bindsym $mod+d exec rofi -show run -lines 10 -opacity 85 -bg "$bg-color" -fg "$text-color" -bgalt "$bg-color" -hlbg "$inactive-text-color" -hlfg "#f9fafb" -width 1000 -font "System San Francisco Display 16"
-
-# lock
-bindsym $mod+F12 exec bash $SCRIPTS/screenlock.sh
-
-# programes
-#bindsym $mod+c exec caja
-bindsym $mod+c exec urxvt -e ranger
-bindsym $mod+g exec firefox
-
-exec --no-startup-id bash $CONFIGS/i3_init.sh
-
-exec_always --no-startup-id compton --config $CONFIGS/compton.conf
-
-# install scrot...
-bindsym Print exec --no-startup-id scrot -u '%Y%m%d_%H%M%S.png' -e 'mv $f ~/Imatges/screen_shots/'
-# install imagemagick...
-bindsym $mod+Print exec --no-startup-id bash $SCRIPTS/screenshot_full.sh
-bindsym --release $mod+Shift+Print exec --no-startup-id $SCRIPTS/screenshot_selection.sh
 
 # WINDOWS REALTED THINGS ------------------------------------------------------
 

@@ -16,6 +16,7 @@ Plugin 'VundleVim/Vundle.vim'
 "Plugin 'artur-shaik/vim-javacomplete2'
 " Plugin colorshceme
 Plugin 'morhetz/gruvbox'
+Plugin 'xuhdev/vim-latex-live-preview'
 
 call vundle#end()            " required
 " ------------------------------------------------------------------------------
@@ -39,6 +40,12 @@ syntax enable
 let g:gruvbox_contrast_dark="soft"
 set background=dark " Setting dark mode
 colorscheme gruvbox
+
+" VIM latex live preview
+let g:livepreview_previewer = 'atril'
+set updatetime=1000
+map <F1> :LLPStartPreview<CR>
+
 
 " YCM config
 "let g:ycm_autoclose_preview_window_after_completion=2
@@ -96,6 +103,8 @@ nnoremap <F3> :set hlsearch!<CR>
 set mouse=a
 
 set scrolloff=5
+
+let g:spellfile_URL = 'http://ftp.vim.org/vim/runtime/spell'
 
 " LATEX MACROS
 

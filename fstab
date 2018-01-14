@@ -1,0 +1,54 @@
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+# / was on /dev/sda1 during installation
+UUID=83ea78a8-cda3-4b02-8616-64653d1060f4 /               ext4    errors=remount-ro 0       1
+# /boot/efi was on /dev/sdb2 during installation
+UUID=D091-0A7E  /boot/efi       vfat    umask=0077      0       1
+# swap was on /dev/sda2 during installation
+UUID=d00b4d2c-cb84-410e-88fb-9e443524463e none            swap    sw              0       0
+
+# Other hard drives
+# only for the current installation: guide:
+#
+# sda = SSD 250GB
+# sda1 = /
+# sda2 = SWAP
+# sda3 = ATV ubuntu
+#
+# sdb = 2TB Blue (ext4)
+# sdb1 = Blue2TB (ext4)
+#
+# sdc = 2TB Black (NTFS)
+# sdc2 = Dades2TB (NTFS)
+#
+# sdd = SSD 120GB
+# sdd4 = Windows partition (NTFS)
+#
+# sde = 1TB Blue
+# sde4 = Old windows partition (NTFS)
+#
+# sda3 (ATV ubuntu)
+UUID=8e88d096-60bb-4116-b56c-fdb0b02c5510 /media/berenguer/atvUbuntu ext4 defaults 0 0
+# sdb1 (Blue2TB)
+UUID=789f00e8-cd3f-49da-9558-6b43017359be /media/berenguer/blue2TB   ext4 defaults 0 0
+# sdc1 (Dades2TB)
+UUID=0E76F8B876F8A21F /media/berenguer/dades2TB    ntfs-3g permissions,uid=berenguer,gid=berenguer,dmask=022,fmask=113 0 0
+# sdd4 (Windows partition)
+UUID=CC0C99300C991694 /media/berenguer/windows     ntfs-3g permissions,uid=berenguer,gid=berenguer,dmask=022,fmask=113 0 0
+# sde4 (old Windows partition)
+UUID=18C0C80EC0C7EFD4 /media/berenguer/old_windows ntfs-3g permissions,uid=berenguer,gid=berenguer,dmask=022,fmask=113 0 0
+
+
+
+# UNRAID SHARES
+//192.168.1.196/berenguer /media/berenguer/cofre/berenguer   cifs credentials=/home/berenguer/.credentials,uid=berenguer,gid=berenguer 0 0
+//192.168.1.196/fotos /media/berenguer/cofre/fotos           cifs credentials=/home/berenguer/.credentials,uid=berenguer,gid=berenguer 0 0
+//192.168.1.196/pel.licules /media/berenguer/cofre/pelis     cifs credentials=/home/berenguer/.credentials,uid=berenguer,gid=berenguer 0 0
+//192.168.1.196/primers /media/berenguer/cofre/primers       cifs credentials=/home/berenguer/.credentials,uid=berenguer,gid=berenguer 0 0
+//192.168.1.196/programes /media/berenguer/cofre/programes   cifs credentials=/home/berenguer/.credentials,uid=berenguer,gid=berenguer 0 0
+//192.168.1.196/tmp /media/berenguer/cofre/tmp               cifs credentials=/home/berenguer/.credentials,uid=berenguer,gid=berenguer 0 0
