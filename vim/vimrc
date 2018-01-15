@@ -66,6 +66,9 @@ au BufNewFile,BufRead *.cl set filetype=c
 set number relativenumber
 set t_Co=256
 
+autocmd FileType tex set spelllang=ca
+autocmd FileType tex set spell
+
 " Split config
 map <C-j> <C-w>j
 map <C-k> <C-w>k
@@ -75,22 +78,17 @@ map <C-l> <C-w>l
 " Set line breaker indicator
 set colorcolumn=80,120
 
-" Be smart when using tabs ;)
-set smarttab
+set expandtab     " Use spaces instead of tab character
+set tabstop=4     " tab character width
+set shiftwidth=4  " what happens when ==, << or >>
+set softtabstop=4 " how many spaces when tabbing
+set smarttab      " begin counting from the begining of the line
 
-" 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
-
-" Use spaces instead of tabs
-set expandtab
-
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
-set linebreak " Wrap lines unsing a set of caracters, including space
-"set tw=120 "Set autowrap
+set autoindent    " copy last line indentation
+set smartindent   " indentation based on syntax
+set wrap          " wrap lines
+set linebreak     " wrap lines without breaking words
+"set tw=120       " set autowrap (bad for tex)
 
 " Ignore case when searching
 set ignorecase
@@ -112,11 +110,10 @@ let g:spellfile_URL = 'http://ftp.vim.org/vim/runtime/spell'
 " yanks the <++> pattern to the _ register
 autocmd FileType tex inoremap <Space><Tab> <Esc>/<++><Enter>"_ca<
 autocmd FileType tex vnoremap <Space><Tab> <Esc>/<++><Enter>
-"map <Space><Tab> <Esc>/<++><Enter>ca<
 autocmd FileType tex inoremap ;gui <++>
 
 " Compilation
-map <F5> :!w<Enter>:!pdflatex <C-r>%<Enter><Enter>
+autocmd FileType tex map <F5> :!w<Enter>:!pdflatex <C-r>%<Enter><Enter>
 
 " Shortcuts
 autocmd FileType tex inoremap ;bf \textbf{}<++><Esc>T{i
@@ -125,9 +122,8 @@ autocmd FileType tex inoremap ;it \textit{}<++><Esc>T{i
 autocmd FileType tex inoremap ;sec \section{}<Enter><Enter><++><Esc>2k0f{a
 autocmd FileType tex inoremap ;ssec \subsection{}<Enter><Enter><++><Esc>2k0f{a
 autocmd FileType tex inoremap ;sssec \subsubsection{}<Enter><Enter><++><Esc>2k0f{a
-autocmd FileType tex inoremap ;tt \texttt{}<Space><++><Esc>T{i
-autocmd FileType tex inoremap ;en \begin{enumerate}<Enter><Enter>\end{enumerate}<Enter><Enter><++><Esc>3kA
-autocmd FileType tex inoremap ;po \begin{itemize}<Enter><Enter>\end{itemize}<Enter><Enter><++><Esc>3kA
+autocmd FileType tex inoremap ;en \begin{enumerate}<CR>\item<Space><CR>\end{enumerate}<CR><CR><++><Esc>3kA
+autocmd FileType tex inoremap ;po \begin{itemize}<CR>\item<Space><CR>\end{itemize}<CR><CR><++><Esc>3kA
 autocmd FileType tex inoremap ;im \begin{figure}<Enter>\centering<Enter>\includegraphics[]{<++>}<Enter>\caption{<++>\label{<++>}}<Enter>\end{figure}<Enter><Enter><++><Esc>4k0<Esc>f[a
 
 
