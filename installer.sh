@@ -15,9 +15,10 @@ RST=$(tput sgr0)
 
 # where to put my dot files
 GIT_DIR=$(dirname $(realpath $0))
-DOT_DIR=$HOME/.config/i3
-mkdir -p $DOT_DIR
+DOT_DIR=$HOME/.config
+mkdir -p $DOT_DIR/i3
 mkdir -p $DOT_DIR/scripts
+mkdir -p $DOT_DIR/ranger
 mkdir -p $(xdg-user-dir PICTURES)/screen_shots
 
 # VIM
@@ -63,11 +64,11 @@ fi
 
 # i3
 echo $LBLU"Installing config files and scripts"$RST
-ln -sf $GIT_DIR/i3/config $DOT_DIR/config
-ln -sf $GIT_DIR/i3/compton.conf $DOT_DIR/compton.conf
-ln -sf $GIT_DIR/i3/i3blocks.conf $DOT_DIR/i3blocks.conf
-ln -sf $GIT_DIR/i3/rofi.conf $DOT_DIR/rofi.conf
-ln -sf $GIT_DIR/i3/i3_init.sh $DOT_DIR/i3_init.sh
+ln -sf $GIT_DIR/i3/config $DOT_DIR/i3/config
+ln -sf $GIT_DIR/i3/compton.conf $DOT_DIR/i3/compton.conf
+ln -sf $GIT_DIR/i3/i3blocks.conf $DOT_DIR/i3/i3blocks.conf
+ln -sf $GIT_DIR/i3/rofi.conf $DOT_DIR/i3/rofi.conf
+ln -sf $GIT_DIR/i3/i3_init.sh $DOT_DIR/i3/i3_init.sh
 
 ln -sf $GIT_DIR/scripts/getmyip.sh $DOT_DIR/scripts/getmyip.sh
 ln -sf $GIT_DIR/scripts/screenshot_selection.sh $DOT_DIR/scripts/screenshot_selection.sh
@@ -79,6 +80,11 @@ ln -sf $GIT_DIR/scripts/screenlock.sh $DOT_DIR/scripts/screenlock.sh
 ln -sf $GIT_DIR/scripts/change_desktop_wallpaper.sh $DOT_DIR/scripts/change_desktop_wallpaper.sh
 ln -sf $GIT_DIR/scripts/lock.png $DOT_DIR/scripts/lock.png
 ln -sf $GIT_DIR/scripts/lock2.png $DOT_DIR/scripts/lock2.png
+
+ln -sf $GIT_DIR/ranger/rc.conf $DOT_DIR/ranger/rc.conf
+ln -sf $GIT_DIR/ranger/rifle.conf $DOT_DIR/ranger/rifle.conf
+
+ln -sf $GIT_DIR/Xdefaults $HOME/.Xdefaults
 
 # font awesome
 echo $LBLU"Installing fonts"$RST

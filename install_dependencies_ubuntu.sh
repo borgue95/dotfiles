@@ -24,6 +24,7 @@ sudo apt-get install -y -qq arandr\
                             imagemagick\
                             lm-sensors\
                             lxappearance\
+                            realpath\
                             rofi\
                             rxvt-unicode\
                             scrot\
