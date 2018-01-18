@@ -86,6 +86,13 @@ ln -sf $GIT_DIR/ranger/rifle.conf $DOT_DIR/ranger/rifle.conf
 
 ln -sf $GIT_DIR/Xdefaults $HOME/.Xdefaults
 
+# bashrc
+if [ -e $HOME/.bashrc ] && [ ! -h $HOME/.bashrc ];
+then
+    mv $HOME/.bashrc $HOME/.bashrc_bk
+fi
+ln -sf $GIT_DIR/bashrc $HOME/.bashrc
+
 # font awesome
 echo $LBLU"Installing fonts"$RST
 if [[ ! -e $HOME/.fonts/fontawesome-webfont.ttf ]];
