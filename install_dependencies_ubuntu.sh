@@ -24,9 +24,10 @@ sudo apt-get install -y -qq arandr\
                             imagemagick\
                             lm-sensors\
                             lxappearance\
+                            ranger\
                             realpath\
                             rofi\
-                            rxvt-unicode\
+                            rxvt-unicode-256color\
                             scrot\
                             unzip\
                             vim\
