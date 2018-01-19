@@ -17,6 +17,7 @@ sudo apt-get update &> /dev/null
 # general dependencies
 echo $LBLU"Installing basic dependencies and desktop utilities"$RST
 sudo apt-get install -y -qq arandr\
+                            bc\
                             build-essential\
                             feh\
                             git\
@@ -24,9 +25,10 @@ sudo apt-get install -y -qq arandr\
                             imagemagick\
                             lm-sensors\
                             lxappearance\
+                            ranger\
                             realpath\
                             rofi\
-                            rxvt-unicode\
+                            rxvt-unicode-256color\
                             scrot\
                             unzip\
                             vim\

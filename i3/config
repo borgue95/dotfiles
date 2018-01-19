@@ -190,8 +190,8 @@ set $workspaceF9 "19: "
 set $workspaceF10 "20: "
 
 # found by arandr
-set $monitor1 "Virtual1"
-set $monitor2 "Virtual1"
+set $monitor1 "default"
+set $monitor2 "default"
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
