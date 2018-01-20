@@ -17,6 +17,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin colorshceme
 Plugin 'morhetz/gruvbox'
 Plugin 'xuhdev/vim-latex-live-preview'
+Plugin 'terryma/vim-multiple-cursors'
 
 call vundle#end()            " required
 " ------------------------------------------------------------------------------
@@ -66,10 +67,11 @@ au BufNewFile,BufRead *.cl set filetype=c
 set number relativenumber
 set t_Co=256
 
-autocmd FileType tex set spelllang=ca
-autocmd FileType tex set spell
+map <F6> :setlocal spell! spelllang=ca<CR>
+"autocmd FileType tex set spelllang=ca
+"autocmd FileType tex set spell
 
-" Split config
+" Split navigation config
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-h> <C-w>h
@@ -110,6 +112,7 @@ let g:spellfile_URL = 'http://ftp.vim.org/vim/runtime/spell'
 " yanks the <++> pattern to the _ register
 autocmd FileType tex inoremap <Space><Tab> <Esc>/<++><Enter>"_ca<
 autocmd FileType tex vnoremap <Space><Tab> <Esc>/<++><Enter>
+autocmd FileType tex nnoremap <Space><Tab> <Esc>/<++><Enter>"_ca<
 autocmd FileType tex inoremap ;gui <++>
 
 " Compilation
@@ -122,9 +125,11 @@ autocmd FileType tex inoremap ;it \textit{}<++><Esc>T{i
 autocmd FileType tex inoremap ;sec \section{}<Enter><Enter><++><Esc>2k0f{a
 autocmd FileType tex inoremap ;ssec \subsection{}<Enter><Enter><++><Esc>2k0f{a
 autocmd FileType tex inoremap ;sssec \subsubsection{}<Enter><Enter><++><Esc>2k0f{a
-autocmd FileType tex inoremap ;en \begin{enumerate}<CR>\item<Space><CR>\end{enumerate}<CR><CR><++><Esc>3kA
-autocmd FileType tex inoremap ;po \begin{itemize}<CR>\item<Space><CR>\end{itemize}<CR><CR><++><Esc>3kA
+
+autocmd FileType tex inoremap ;en \begin{enumerate}<CR><CR>\item<Space><CR><CR>\end{enumerate}<CR><CR><++><Esc>3kA
+autocmd FileType tex inoremap ;po \begin{itemize}<CR><CR>\item<Space><CR><CR>\end{itemize}<CR><CR><++><Esc>3kA
 autocmd FileType tex inoremap ;im \begin{figure}<Enter>\centering<Enter>\includegraphics[]{<++>}<Enter>\caption{<++>\label{<++>}}<Enter>\end{figure}<Enter><Enter><++><Esc>4k0<Esc>f[a
+autocmd FileType tex inoremap ;beg \begin{DELRN}<Enter><++><Enter>\end{DELRN}<Enter><Enter><++><Esc>4k0fR:MultipleCursorsFind<Space>DELRN<Enter>c
 
 
 " C/C++ MACROS
