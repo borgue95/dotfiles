@@ -16,6 +16,14 @@ set $term urxvt
 
 # BINDSYMS FOR PROGRAMS -------------------------------------------------------
 
+# Math scratchpad
+for_window [instance="math"] floating enable
+for_window [instance="math"] resize set 800 300
+for_window [instance="math"] move position center
+for_window [instance="math"] move scratchpad
+exec --no-startup-id $term -name math -e python
+bindsym $mod+a [instance="math"] scratchpad show; move position center
+
 # start a terminal
 bindsym $mod+Return exec $term
 
@@ -160,7 +168,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+#bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
