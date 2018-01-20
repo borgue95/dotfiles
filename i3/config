@@ -2,10 +2,10 @@
 set $mod Mod4
 
 # this lines are modified when the wallpaper is changed
-set $bg-color #46614e
-set $inactive-bg-color #46614e
-set $text-color #8da688
-set $inactive-text-color #557c6a
+set $bg-color #5e6669
+set $inactive-bg-color #5e6669
+set $text-color #f9f9f9
+set $inactive-text-color #d7dee4
 set $urgent-bg-color      #e53935
 set $indicator            #123456
 
