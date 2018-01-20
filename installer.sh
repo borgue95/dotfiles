@@ -49,7 +49,7 @@ if [[ ! -e $HOME/apps/src/i3-gaps ]];
 then
     # Compile i3-gaps
     cd $HOME/apps/src
-    git clone https://www.github.com/Airblader/i3
+    git clone https://www.github.com/Airblader/i3 $HOME/apps/src/i3-gaps
     cd i3-gaps
     autoreconf --force --install
     rm -rf build/
@@ -117,6 +117,8 @@ then
 else
     echo $LYEL"  Font San Francisco Display seams to be installed in ~/.fonts. Skipping"$RST
 fi
+
+rm Release.key
 
 i3-msg restart
 
