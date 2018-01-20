@@ -60,6 +60,10 @@ int main(int argc, char **argv)
     size_t numPixels = image->height() * image->width();
     
     struct point3D *list_of_points = (struct point3D *) malloc(sizeof(struct point3D) * numPixels);
+    if (!list_of_points) {
+        printf("Could not allocate memory. Exiting\n");
+        exit(EXIT_FAILURE);
+    }
 
     // put each pixel in the struct point3D
     for (j = 0; j < image->height(); j++) {
@@ -77,6 +81,8 @@ int main(int argc, char **argv)
     struct point3D *centroids = kmeans3D(list_of_points, numPixels, k);
     float *luminosity = (float *) malloc(sizeof(float) * k);
 
+    printf("Kmeans DONE\n");
+
     for (i = 0; i < k; i++) {
         //printf("Centroid %lu with color [%.2f %.2f %.2f]", i, centroids[i].x, centroids[i].y, centroids[i].z);
         luminosity[i] = 0.299 * centroids[i].x + 0.587 * centroids[i].y + 0.114 * centroids[i].z;
@@ -85,8 +91,11 @@ int main(int argc, char **argv)
 
     float  min;
     size_t idx = 0;
-    cimg_library::CImg<uint8_t> *out = new cimg_library::CImg<uint8_t>(100*k, 100, 1, 3);
+    //cimg_library::CImg<uint8_t> *out = new cimg_library::CImg<uint8_t>(100*k, 100, 1, 3);
     FILE *out_points = fopen("points.txt", "w");
+    if (!out_points) {
+        printf("Could not open points.txt. Exiting\n");
+    }
     // order by luminostiy, and generate a nice output image
     for (i = 0; i < k; i++) {
         // find first min:
@@ -102,9 +111,9 @@ int main(int argc, char **argv)
         // plot color
         for (j = i*100; j < i*100 + 100; j++) { // columnes
             for (l = 0; l < 100; l++) {
-                (*out)(j, l, 0, 0) = (uint8_t) centroids[idx].x;
-                (*out)(j, l, 0, 1) = (uint8_t) centroids[idx].y;
-                (*out)(j, l, 0, 2) = (uint8_t) centroids[idx].z;
+                //(*out)(j, l, 0, 0) = (uint8_t) centroids[idx].x;
+                //(*out)(j, l, 0, 1) = (uint8_t) centroids[idx].y;
+                //(*out)(j, l, 0, 2) = (uint8_t) centroids[idx].z;
             }
         }
         fprintf(out_points, "#%02x%02x%02x\n", (uint8_t) centroids[idx].x,
@@ -114,7 +123,7 @@ int main(int argc, char **argv)
     }
     fclose(out_points);
 
-    out->save_png("out.png");
+    //out->save_png("out.png");
 
     //plotPoints(list_of_points, numPixels, k);
 

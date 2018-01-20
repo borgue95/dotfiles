@@ -1,11 +1,24 @@
 #!/bin/bash
 
 # TEMP
-temp1=$(sensors | grep "Package id 0: " | awk '{print $4}')
-temp1=${temp1:1}
+if [ $(lscpu | grep Architecture: | awk '{print $2}') != "x86_64" ];
+then
+    temp1=$(/opt/vc/bin/vcgencmd measure_temp)
+    temp1=${temp1:5:4}
+    temp1=$temp1'\xc2\xb0'C  # this is the degree symbol
+else
+    temp1=$(sensors | grep "Package id 0: " | awk '{print $4}')
+    temp1=${temp1:1}
+fi
 
 # FREQUENCY
-freq=$(lscpu | head -n 15 | tail -n 1 | awk '{print $3}')
+if [ $(lscpu | grep Architecture: | awk '{print $2}') != "x86_64" ];
+then
+    freq=$(echo "scale=2; $(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq) / 1000.0" | bc);
+else
+    freq=$(lscpu | head -n 15 | tail -n 1 | awk '{print $3}')
+fi
+
 # ceiling: 3.99 == 4.00
 #freq=$(echo "scale=2; if ($freq/1-$freq != 0) $freq/1+1 else $freq" | bc)
 #freq=$(echo "scale=2;$freq/1000.0" | bc)
@@ -61,11 +74,11 @@ cpu_usage="$cpu_usage"
 if [ "$(echo "scale=2;$cpu_usage > 75.0 && $cpu_usage < 95.0" | bc -l)" -eq 1 ]; then # 75-95
     output="<span foreground=\"#FFFC00\"><b>$cpu_usage%</b></span>"
     echo -n $output
-    echo " @ $freq, $temp1"
+    echo -e " @ $freq, $temp1"
 elif [ "$(echo "scale=2;$cpu_usage >= 95.0" | bc -l)" -eq 1 ]; then # > 95
     output="<span background=\"#FF0000\" foreground=\"#FFFFFF\"><b> $cpu_usage% </b></span>"
     echo -n $output
-    echo " @ $freq, $temp1"
+    echo -e " @ $freq, $temp1"
 else # < 75
-    echo "$cpu_usage""% @ $freq, $temp1"
+    echo -e "$cpu_usage""% @ $freq, $temp1"
 fi
