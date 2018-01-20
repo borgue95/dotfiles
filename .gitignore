@@ -1,2 +1,7 @@
 *.swp
 *.DS_Store
+scripts/image_kmeans/main
+scripts/image_kmeans/points.txt
+scripts/image_kmeans/out.png
+scripts/points.txt
+scripts/out.png
