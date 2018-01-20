@@ -19,6 +19,7 @@ echo $LBLU"Installing basic dependencies and desktop utilities"$RST
 sudo apt-get install -y -qq arandr\
                             bc\
                             build-essential\
+                            compton\
                             feh\
                             git\
                             gnome-terminal\

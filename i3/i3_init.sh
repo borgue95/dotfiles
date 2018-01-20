@@ -12,8 +12,8 @@ i3-msg restart
 
 # init wallpapers
 #bash wallpaper.sh &
-feh --bg-scale "$(cat $REAL_DIR/../scripts/last_wallpaper)" \
-    --bg-scale "$(cat $REAL_DIR/../scripts/last_wallpaper)"
+feh --bg-fill "$(cat $REAL_DIR/../scripts/last_wallpaper)" \
+    --bg-fill "$(cat $REAL_DIR/../scripts/last_wallpaper)"
 
 # startup apps
 bash $REAL_DIR/../scripts/getmyip.sh &

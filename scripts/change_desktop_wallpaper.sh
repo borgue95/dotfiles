@@ -35,7 +35,7 @@ else
         wallpaper=$(cat $BASE_DIR/last_wallpaper)
     else
         $BASE_DIR/image_kmeans/main "$1" 10
-        mv out.png $BASE_DIR/out.png
+        #mv out.png $BASE_DIR/out.png
         mv points.txt $BASE_DIR/points.txt
         dark_color=$(cat $BASE_DIR/points.txt | head -n 3 | tail -n 1)
         semi_dark_color=$(cat $BASE_DIR/points.txt | head -n 6 | tail -n 1)
@@ -64,7 +64,7 @@ then
 fi
 
 # change background
-feh --bg-scale "$wallpaper" --bg-scale "$wallpaper"
+feh --bg-fill "$wallpaper" --bg-fill "$wallpaper"
 echo "$wallpaper" > $BASE_DIR/last_wallpaper
 
 # output is 'config' file. refresh i3
