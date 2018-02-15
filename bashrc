@@ -162,8 +162,9 @@ if ! shopt -oq posix; then
 fi
 
 
-export PATH="$HOME/apps/bin:$HOME/apps/src/anaconda3/bin:/usr/local/cuda/bin:$PATH"
-export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
+export PATH="$HOME/apps/bin:/usr/local/cuda-8.0/bin:$PATH"
+#export PATH="$HOME/apps/bin:/usr/local/cuda-8.0/bin:$HOME/apps/src/anaconda3/bin:$PATH"
+export LD_LIBRARY_PATH="/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH"
 export RANGER_LOAD_DEFAULT_RC=FALSE
 export TERM=xterm-256color
 

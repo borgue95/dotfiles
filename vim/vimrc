@@ -1,6 +1,6 @@
 
 " VUNDLE CONFIG
-" ------------------------------------------------------------------------------
+" -----------------------------------------------------------------------------
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -14,25 +14,24 @@ Plugin 'VundleVim/Vundle.vim'
 "Plugin 'https://github.com/Valloric/YouCompleteMe.git'
 " Plugin for autocompletion for Java
 "Plugin 'artur-shaik/vim-javacomplete2'
-" Plugin colorshceme
 Plugin 'morhetz/gruvbox'
 Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'terryma/vim-multiple-cursors'
 
 call vundle#end()            " required
-" ------------------------------------------------------------------------------
+" -----------------------------------------------------------------------------
 
 " PATHOGEN CONFIG
-" ------------------------------------------------------------------------------
+" -----------------------------------------------------------------------------
 "execute pathogen#infect()
-" ------------------------------------------------------------------------------
+" -----------------------------------------------------------------------------
 
 filetype on
 filetype plugin on
 filetype plugin indent on
 
 " PLUGIN CONFIGS
-" ------------------------------------------------------------------------------
+" -----------------------------------------------------------------------------
 " SYNTAX HIGHLIGHTING
 syntax on
 syntax enable
@@ -60,16 +59,21 @@ map <F1> :LLPStartPreview<CR>
 
 
 " VIM CONFIG
-" ------------------------------------------------------------------------------
+" -----------------------------------------------------------------------------
 
-" Set .cl type's syntax to .c syntax
 au BufNewFile,BufRead *.cl set filetype=c
+au BufNewFile,BufRead *.lytex set filetype=tex
+
 set number relativenumber
 set t_Co=256
 
 map <F6> :setlocal spell! spelllang=ca<CR>
-"autocmd FileType tex set spelllang=ca
-"autocmd FileType tex set spell
+
+let g:spellfile_URL = 'http://ftp.vim.org/vim/runtime/spell'
+autocmd FileType tex set textwidth=79  " autowrap at 80 characters
+
+map <F7> gwip                          " wrap text inside the paragraph
+map <F8> vipJ                          " unwrap text inside the paragraph
 
 " Split navigation config
 map <C-j> <C-w>j
@@ -90,7 +94,6 @@ set autoindent    " copy last line indentation
 set smartindent   " indentation based on syntax
 set wrap          " wrap lines
 set linebreak     " wrap lines without breaking words
-"set tw=120       " set autowrap (bad for tex)
 
 " Ignore case when searching
 set ignorecase
@@ -104,69 +107,40 @@ set mouse=a
 
 set scrolloff=5
 
-let g:spellfile_URL = 'http://ftp.vim.org/vim/runtime/spell'
-
-" LATEX MACROS
-
 " Navigation
 " yanks the <++> pattern to the _ register
-autocmd FileType tex inoremap <Space><Tab> <Esc>/<++><Enter>"_ca<
-autocmd FileType tex vnoremap <Space><Tab> <Esc>/<++><Enter>
-autocmd FileType tex nnoremap <Space><Tab> <Esc>/<++><Enter>"_ca<
+autocmd FileType tex inoremap <Tab><Tab> <Esc>/<++><CR>"_ca<
+autocmd FileType tex vnoremap <Tab><Tab> <Esc>/<++><CR>
+autocmd FileType tex nnoremap <Tab><Tab> <Esc>/<++><CR>"_ca<
 autocmd FileType tex inoremap ;gui <++>
 
 " Compilation
-autocmd FileType tex map <F5> :!w<Enter>:!pdflatex <C-r>%<Enter><Enter>
+autocmd FileType tex map <F5> :!w<CR>:!pdflatex <C-r>%<CR><CR>
 
 " Shortcuts
 autocmd FileType tex inoremap ;bf \textbf{}<++><Esc>T{i
 autocmd FileType tex inoremap ;tt \texttt{}<++><Esc>T{i
 autocmd FileType tex inoremap ;it \textit{}<++><Esc>T{i
-autocmd FileType tex inoremap ;sec \section{}<Enter><Enter><++><Esc>2k0f{a
-autocmd FileType tex inoremap ;ssec \subsection{}<Enter><Enter><++><Esc>2k0f{a
-autocmd FileType tex inoremap ;sssec \subsubsection{}<Enter><Enter><++><Esc>2k0f{a
+autocmd FileType tex inoremap ;sc \textsc{}<++><Esc>T{i
+autocmd FileType tex inoremap ;sec \section{}<CR><CR><++><Esc>2k0f{a
+autocmd FileType tex inoremap ;ssec \subsection{}<CR><CR><++><Esc>2k0f{a
+autocmd FileType tex inoremap ;sssec \subsubsection{}<CR><CR><++><Esc>2k0f{a
 
-autocmd FileType tex inoremap ;en \begin{enumerate}<CR><CR>\item<Space><CR><CR>\end{enumerate}<CR><CR><++><Esc>3kA
-autocmd FileType tex inoremap ;po \begin{itemize}<CR><CR>\item<Space><CR><CR>\end{itemize}<CR><CR><++><Esc>3kA
-autocmd FileType tex inoremap ;im \begin{figure}<Enter>\centering<Enter>\includegraphics[]{<++>}<Enter>\caption{<++>\label{<++>}}<Enter>\end{figure}<Enter><Enter><++><Esc>4k0<Esc>f[a
-autocmd FileType tex inoremap ;beg \begin{DELRN}<Enter><++><Enter>\end{DELRN}<Enter><Enter><++><Esc>4k0fR:MultipleCursorsFind<Space>DELRN<Enter>c
+autocmd FileType tex inoremap ;en \begin{enumerate}<CR><CR>\item<Space><CR><CR>\end{enumerate}<CR><CR><++><Esc>4kA
+autocmd FileType tex inoremap ;po \begin{itemize}<CR><CR>\item<Space><CR><CR>\end{itemize}<CR><CR><++><Esc>4kA
+autocmd FileType tex inoremap ;im \begin{figure}<CR>\cCRing<CR>\includegraphics[]{<++>}<CR>\caption{<++>\label{<++>}}<CR>\end{figure}<CR><CR><++><Esc>4k0<Esc>f[a
+autocmd FileType tex inoremap ;beg \begin{DELRN}<CR><++><CR>\end{DELRN}<CR><CR><++><Esc>4k0fR:MultipleCursorsFind<Space>DELRN<CR>c
 
+" Search in multiple lines
+" Search for the ... arguments separated with whitespace (if no '!'),
+" or with non-word characters (if '!' added to command).
+function! SearchMultiLine(bang, ...)
+  if a:0 > 0
+    let sep = (a:bang) ? '\_W\+' : '\_s\+'
+    let @/ = join(a:000, sep)
+  endif
+endfunction
+command! -bang -nargs=* -complete=tag S call SearchMultiLine(<bang>0, <f-args>)|normal! /<C-R>/<CR>
 
 " C/C++ MACROS
-
-" VIM STATUS BAR
-" ------------------------------------------------------------------------------
-
-"set noruler
-"set laststatus=2
-
-"hi User1 guifg=#ffdad8  guibg=#880c0e
-"hi User2 guifg=#000000  guibg=#F4905C
-"hi User3 guifg=#292b00  guibg=#f4f597
-"hi User4 guifg=#112605  guibg=#aefe7B
-"hi User5 guifg=#051d00  guibg=#7dcc7d
-"hi User7 guifg=#ffffff  guibg=#880c0e gui=bold
-"hi User8 guifg=#ffffff  guibg=#5b7fbb
-"hi User9 guifg=#ffffff  guibg=#810085
-"hi User0 guifg=#ffffff  guibg=#094afe
-
-"set statusline=
-"set statusline+=%7*\[%n]                                  "buffernr
-"set statusline+=%1*\ %<%F\                                "File+path
-"set statusline+=%2*\ %y\                                  "FileType
-"set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
-"set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
-"set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..) 
-"set statusline+=%5*\ %{&spelllang}\%{HighlightSearch()}\  "Spellanguage & Highlight on?
-"set statusline+=%8*\ %=\ row:%l/%L\ (%03p%%)\             "Rownumber/total (%)
-"set statusline+=%9*\ col:%03c\                            "Colnr
-"set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Readonly? Top/bot.
-
-"function! HighlightSearch()
-"    if &hls
-"        return 'H'
-"    else
-"        return ''
-"    endif
-"endfunction
 
