@@ -2,10 +2,10 @@
 set $mod Mod4
 
 # this lines are modified when the wallpaper is changed
-set $bg-color #19231b
-set $inactive-bg-color #19231b
-set $text-color #c3ccd3
-set $inactive-text-color #8999a6
+set $bg-color #093325
+set $inactive-bg-color #093325
+set $text-color #809bb0
+set $inactive-text-color #225664
 set $urgent-bg-color      #e53935
 set $indicator            #123456
 
@@ -13,6 +13,9 @@ set $indicator            #123456
 set $CONFIGS ~/.config/i3
 set $SCRIPTS ~/.config/i3/scripts
 set $term urxvt
+# found by arandr
+set $monitor1 "DVI-D-1"
+set $monitor2 "VGA-0"
 
 # BINDSYMS FOR PROGRAMS -------------------------------------------------------
 
@@ -21,8 +24,20 @@ for_window [instance="math"] floating enable
 for_window [instance="math"] resize set 800 300
 for_window [instance="math"] move position center
 for_window [instance="math"] move scratchpad
+
+# stuff scratchpad
+for_window [instance="stuff"] floating enable
+for_window [instance="stuff"] resize set 800 300
+for_window [instance="stuff"] move position center
+for_window [instance="stuff"] move scratchpad
+
+# scratch pad init
 exec --no-startup-id $term -name math -e python
+exec --no-startup-id $term -name stuff
 bindsym $mod+a [instance="math"] scratchpad show; move position center
+bindsym $mod+s [instance="stuff"] scratchpad show; move position center
+bindsym $mod+shift+a exec --no-startup-id $term -name math -e python
+bindsym $mod+shift+s exec --no-startup-id $term -name stuff
 
 # start a terminal
 bindsym $mod+Return exec $term
@@ -30,7 +45,7 @@ bindsym $mod+Return exec $term
 # TODO mirar com coi funciona bé el rofi
 #bindsym $mod+d exec rofi -show run -config $CONFIGS/rofi.conf -fullscreen -font "System San Francisco Display 16"
 #bindsym $mod+d exec rofi -show run -lines 10 -padding 380 -opacity 85 -bg "$bg-color" -fg "$text-color" -bgalt "$bg-color" -hlbg "#6c7893" -hlfg "#f9fafb" -width 1920 -font "System San Francisco Display 16"
-bindsym $mod+d exec rofi -show run -lines 10 -opacity 85 -bg "$bg-color" -fg "$text-color" -bgalt "$bg-color" -hlbg "$inactive-text-color" -hlfg "#f9fafb" -width 1000 -font "System San Francisco Display 16"
+bindsym $mod+d exec --no-startup-id rofi -show run -lines 10 -opacity 85 -bg "$bg-color" -fg "$text-color" -bgalt "$bg-color" -hlbg "$inactive-text-color" -hlfg "#f9fafb" -width 1000 -font "System San Francisco Display 16"
 
 # lock
 bindsym $mod+F12 exec bash $SCRIPTS/screenlock.sh
@@ -126,10 +141,10 @@ floating_modifier $mod
 bindsym $mod+q kill
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+ntilde focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -150,14 +165,14 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split
-bindsym $mod+h split h
+bindsym $mod+b split h
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+bindsym $mod+z layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -196,10 +211,6 @@ set $workspaceF7 "17: "
 set $workspaceF8 "18: "
 set $workspaceF9 "19: "
 set $workspaceF10 "20: "
-
-# found by arandr
-set $monitor1 "DVI-D-0"
-set $monitor2 "DVI-I-0"
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1

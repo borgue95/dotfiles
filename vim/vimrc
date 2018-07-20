@@ -15,15 +15,16 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin for autocompletion for Java
 "Plugin 'artur-shaik/vim-javacomplete2'
 Plugin 'morhetz/gruvbox'
-Plugin 'xuhdev/vim-latex-live-preview'
+"Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'junegunn/goyo.vim'
 
 call vundle#end()            " required
 " -----------------------------------------------------------------------------
 
 " PATHOGEN CONFIG
 " -----------------------------------------------------------------------------
-"execute pathogen#infect()
+execute pathogen#infect()
 " -----------------------------------------------------------------------------
 
 filetype on
@@ -44,8 +45,9 @@ colorscheme gruvbox
 " VIM latex live preview
 let g:livepreview_previewer = 'atril'
 set updatetime=1000
-map <F1> :LLPStartPreview<CR>
 
+" Goyo config
+let g:goyo_width=100
 
 " YCM config
 "let g:ycm_autoclose_preview_window_after_completion=2
@@ -57,6 +59,20 @@ map <F1> :LLPStartPreview<CR>
 " JAVACOMPLETE2 config
 "autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
+" F-MAPPINGS
+" -----------------------------------------------------------------------------
+map <F1> :LLPStartPreview<CR>
+map <F2> :NERDTreeToggle<CR>
+nnoremap <F3> :set hlsearch!<CR>       " Toggle visibility of search results
+
+" LaTeX basic compilation
+autocmd FileType tex map <F5> :!w<CR>:!pdflatex --shell-escape <C-r>%<CR><CR>
+map <F6> :setlocal spell! spelllang=ca<CR>
+map <F7> gwip                          " wrap text inside the paragraph
+map <F8> vipJ                          " unwrap text inside the paragraph
+map <F9> :Goyo<CR>                     " Toggle Goyo
+
+
 
 " VIM CONFIG
 " -----------------------------------------------------------------------------
@@ -67,13 +83,8 @@ au BufNewFile,BufRead *.lytex set filetype=tex
 set number relativenumber
 set t_Co=256
 
-map <F6> :setlocal spell! spelllang=ca<CR>
-
 let g:spellfile_URL = 'http://ftp.vim.org/vim/runtime/spell'
 autocmd FileType tex set textwidth=79  " autowrap at 80 characters
-
-map <F7> gwip                          " wrap text inside the paragraph
-map <F8> vipJ                          " unwrap text inside the paragraph
 
 " Split navigation config
 map <C-j> <C-w>j
@@ -84,11 +95,11 @@ map <C-l> <C-w>l
 " Set line breaker indicator
 set colorcolumn=80,120
 
-set expandtab     " Use spaces instead of tab character
 set tabstop=4     " tab character width
 set shiftwidth=4  " what happens when ==, << or >>
 set softtabstop=4 " how many spaces when tabbing
 set smarttab      " begin counting from the begining of the line
+set expandtab     " Use spaces instead of tab character
 
 set autoindent    " copy last line indentation
 set smartindent   " indentation based on syntax
@@ -99,13 +110,19 @@ set linebreak     " wrap lines without breaking words
 set ignorecase
 " Highlight all search pattern matches
 set hlsearch
-" Toggle visibility of search results
-nnoremap <F3> :set hlsearch!<CR>
 
 " Use mouse to move inside vim
-set mouse=a
+"set mouse=a
+set visualbell " disables terminal bell on vim
 
 set scrolloff=5
+
+" FINDING FILES
+" Search down into subfolders
+set path+=**
+
+" Display all matching files when I tab complete
+set wildmenu
 
 " Navigation
 " yanks the <++> pattern to the _ register
@@ -113,9 +130,6 @@ autocmd FileType tex inoremap <Tab><Tab> <Esc>/<++><CR>"_ca<
 autocmd FileType tex vnoremap <Tab><Tab> <Esc>/<++><CR>
 autocmd FileType tex nnoremap <Tab><Tab> <Esc>/<++><CR>"_ca<
 autocmd FileType tex inoremap ;gui <++>
-
-" Compilation
-autocmd FileType tex map <F5> :!w<CR>:!pdflatex <C-r>%<CR><CR>
 
 " Shortcuts
 autocmd FileType tex inoremap ;bf \textbf{}<++><Esc>T{i

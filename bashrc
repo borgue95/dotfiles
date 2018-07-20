@@ -48,12 +48,12 @@ function stop_timer {
 	fi
 	unset timer
 }
-trap 'start_timer' DEBUG
-if [ "$PROMPT_COMMAND" == "" ]; then
- 	PROMPT_COMMAND="stop_timer"
-else
-	PROMPT_COMMAND="$PROMPT_COMMAND; stop_timer"
-fi
+#trap 'start_timer' DEBUG
+#if [ "$PROMPT_COMMAND" == "" ]; then
+ 	#PROMPT_COMMAND="stop_timer"
+#else
+	#PROMPT_COMMAND="$PROMPT_COMMAND; stop_timer"
+#fi
 
 
 DBLK=$(tput setaf 0)
@@ -162,7 +162,7 @@ if ! shopt -oq posix; then
 fi
 
 
-export PATH="$HOME/apps/bin:/usr/local/cuda-8.0/bin:$PATH"
+export PATH="$HOME/apps/bin:$HOME/.Qt/5.10.1/gcc_64/bin:/usr/local/cuda-8.0/bin:$PATH"
 #export PATH="$HOME/apps/bin:/usr/local/cuda-8.0/bin:$HOME/apps/src/anaconda3/bin:$PATH"
 export LD_LIBRARY_PATH="/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH"
 export RANGER_LOAD_DEFAULT_RC=FALSE

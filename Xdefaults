@@ -41,12 +41,15 @@ URxvt.font:         9x15
 !URxvt.font: 		xft:officecodepro:size=11
 URxvt.scrollBar:	false
 URxvt.cursorColor:	white
-!URxvt.perl-ext-common:	default,matcher
+URxvt.perl-ext-common:	default,matcher,close-gracefully
+!,bell-command
 !URxvt.perl-lib:		$HOME/.config/Scripts
 !URxvt.url-launcher:	/usr/bin/xdg-open
 !URxvt.matcher.button:	1
 !URxvt.resize-font.smaller:	C-Down
 !URxvt.resize-font.bigger:	C-Up
+
+URxvt.bell-command: aplay ~/drip.wav
 
 URxvt.colorUL:		#4682B4
 
