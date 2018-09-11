@@ -15,6 +15,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin for autocompletion for Java
 "Plugin 'artur-shaik/vim-javacomplete2'
 Plugin 'morhetz/gruvbox'
+Plugin 'junegunn/seoul256.vim'
 "Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'junegunn/goyo.vim'
@@ -34,6 +35,13 @@ filetype plugin indent on
 " PLUGIN CONFIGS
 " -----------------------------------------------------------------------------
 " SYNTAX HIGHLIGHTING
+
+" enable lilypond syntax
+filetype off
+set runtimepath+=/usr/share/lilypond/2.18.2/vim
+filetype on
+
+" enable syntax highlighting
 syntax on
 syntax enable
  
@@ -41,6 +49,11 @@ syntax enable
 let g:gruvbox_contrast_dark="soft"
 set background=dark " Setting dark mode
 colorscheme gruvbox
+
+" SEOUL 256 config
+"let g:seoul256_srgb = 1
+"let g:seoul256_background = 236
+"colo seoul256
 
 " VIM latex live preview
 let g:livepreview_previewer = 'atril'

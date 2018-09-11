@@ -35,9 +35,11 @@
 *.color15: #ebdbb2
 
 !URxvt.intensityStyles:	false
-URxvt.background:       [98]#23272A
+URxvt.background:       #23272A
+!URxvt.background:       [98]#23272A
 !URxvt.depth:		32
-URxvt.font:         9x15
+URxvt.font:         8x13
+!URxvt.font:         9x15
 !URxvt.font: 		xft:officecodepro:size=11
 URxvt.scrollBar:	false
 URxvt.cursorColor:	white

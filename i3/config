@@ -2,10 +2,10 @@
 set $mod Mod4
 
 # this lines are modified when the wallpaper is changed
-set $bg-color #093325
-set $inactive-bg-color #093325
-set $text-color #809bb0
-set $inactive-text-color #225664
+set $bg-color #8c7a52
+set $inactive-bg-color #8c7a52
+set $text-color #e4e4dc
+set $inactive-text-color #b7b8b2
 set $urgent-bg-color      #e53935
 set $indicator            #123456
 
@@ -38,6 +38,7 @@ bindsym $mod+a [instance="math"] scratchpad show; move position center
 bindsym $mod+s [instance="stuff"] scratchpad show; move position center
 bindsym $mod+shift+a exec --no-startup-id $term -name math -e python
 bindsym $mod+shift+s exec --no-startup-id $term -name stuff
+bindsym $mod+u exec --no-startup-id $SCRIPTS/dmenumount.sh
 
 # start a terminal
 bindsym $mod+Return exec $term
@@ -105,7 +106,7 @@ bindsym $mod+r mode "resize"
 bar {
     position bottom
     status_command i3blocks -c $CONFIGS/i3blocks.conf
-    tray_output $monitor1
+    tray_output $monitor2
     font pango:DejaVu Sans Mono, FontAwesome 10
     colors{
         background $bg-color

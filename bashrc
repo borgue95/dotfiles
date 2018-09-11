@@ -135,7 +135,7 @@ fi
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
-alias l='ls -CF'
+alias l='ls -l'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -162,7 +162,7 @@ if ! shopt -oq posix; then
 fi
 
 
-export PATH="$HOME/apps/bin:$HOME/.Qt/5.10.1/gcc_64/bin:/usr/local/cuda-8.0/bin:$PATH"
+export PATH="$HOME/apps/bin:$HOME/.Qt/5.10.1/gcc_64/bin:/usr/local/cuda-8.0/bin:/usr/local/texlive/2018/bin/x86_64-linux:$PATH"
 #export PATH="$HOME/apps/bin:/usr/local/cuda-8.0/bin:$HOME/apps/src/anaconda3/bin:$PATH"
 export LD_LIBRARY_PATH="/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH"
 export RANGER_LOAD_DEFAULT_RC=FALSE
