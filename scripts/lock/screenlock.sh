@@ -2,6 +2,7 @@
 
 # requires imagemagick and i3lock
 DIR=$(dirname $(realpath $0))
+DIR=$HOME/.config/i3/scripts/lock
 LOCK=$DIR/lock2.png
 TMP=$DIR/tmp.png
 

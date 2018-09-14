@@ -49,16 +49,17 @@ bindsym $mod+Return exec $term
 bindsym $mod+d exec --no-startup-id rofi -show run -lines 10 -opacity 85 -bg "$bg-color" -fg "$text-color" -bgalt "$bg-color" -hlbg "$inactive-text-color" -hlfg "#f9fafb" -width 1000 -font "System San Francisco Display 16"
 
 # lock
-bindsym $mod+F12 exec bash $SCRIPTS/screenlock.sh
+bindsym $mod+F12 exec bash $SCRIPTS/lock/screenlock.sh
 
 # programes
 #bindsym $mod+c exec caja
 bindsym $mod+c exec $term -e ranger
 bindsym $mod+g exec firefox
 
-exec --no-startup-id bash $CONFIGS/i3_init.sh
+exec --no-startup-id bash $CONFIGS/second_init.sh
+exec --no-startup-id bash $CONFIGS/init.sh
 
-exec_always --no-startup-id compton --config $CONFIGS/compton.conf
+exec_always --no-startup-id compton --config $CONFIGS/config_files/compton.conf
 
 # install scrot...
 bindsym Print exec --no-startup-id scrot -u '%Y%m%d_%H%M%S.png' -e 'mv $f ~/Imatges/screen_shots/'
@@ -105,7 +106,7 @@ bindsym $mod+r mode "resize"
 
 bar {
     position bottom
-    status_command i3blocks -c $CONFIGS/i3blocks.conf
+    status_command i3blocks -c $CONFIGS/config_files/i3blocks.conf
     tray_output $monitor2
     font pango:DejaVu Sans Mono, FontAwesome 10
     colors{
@@ -121,12 +122,12 @@ bar {
 
 
 # i3-gaps SPECIFIC ------------------------------------------------------------
-set $inner 8
-set $outer 8
-gaps inner $inner
-gaps outer $outer
-for_window [class="^.*"] border pixel 0
-hide_edge_borders both
+#set $inner 8
+#set $outer 8
+#gaps inner $inner
+#gaps outer $outer
+#for_window [class="^.*"] border pixel 0
+#hide_edge_borders both
 # no borders on windows
 #new_window normal 0 px
 

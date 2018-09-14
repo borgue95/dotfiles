@@ -43,7 +43,7 @@ URxvt.font:         8x13
 !URxvt.font: 		xft:officecodepro:size=11
 URxvt.scrollBar:	false
 URxvt.cursorColor:	white
-URxvt.perl-ext-common:	default,matcher,close-gracefully
+!URxvt.perl-ext-common:	default,matcher,close-gracefully
 !,bell-command
 !URxvt.perl-lib:		$HOME/.config/Scripts
 !URxvt.url-launcher:	/usr/bin/xdg-open
@@ -51,7 +51,7 @@ URxvt.perl-ext-common:	default,matcher,close-gracefully
 !URxvt.resize-font.smaller:	C-Down
 !URxvt.resize-font.bigger:	C-Up
 
-URxvt.bell-command: aplay ~/drip.wav
+!URxvt.bell-command: aplay ~/drip.wav
 
 URxvt.colorUL:		#4682B4
 

@@ -1,15 +1,15 @@
 HOME          = $(PWD)
 EXEC          = $(HOME)/main
 CC            = g++
-SRC           = src/*.c src/*.cpp
+SRC           = *.c *.cpp
 CFLAGS        = -fopenmp #-Wall -Wextra
 
 UNAME := $(shell uname)
 
 ifeq ($(UNAME), Linux)
-INCL_P      = -I$(HOME)/headers
+INCL_P      = -I$(HOME)
 LIBS        = -lm -lrt -lX11 -lpthread -L/usr/X11R6/lib
-INCL_AMD    = -I$(HOME)/headers
+INCL_AMD    = -I$(HOME)
 LIBS_AMD    = $(LIBS)
 CFLAGS_AMD  = $(CFLAGS)
 endif

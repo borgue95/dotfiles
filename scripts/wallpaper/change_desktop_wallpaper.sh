@@ -2,6 +2,7 @@
 
 # script real location
 BASE_DIR=$(dirname $(realpath $0))  # scripts/
+BASE_DIR=$HOME/.config/i3/scripts/wallpaper
 
 # get colors
 if [ -z "$1" ]
@@ -36,17 +37,18 @@ else
     else
         $BASE_DIR/image_kmeans/main "$1" 10
         #mv out.png $BASE_DIR/out.png
-        mv points.txt $BASE_DIR/points.txt
+        #mv points.txt $BASE_DIR/points.txt
+        mv $BASE_DIR/image_kmeans/points.txt $BASE_DIR/points.txt
         dark_color=$(cat $BASE_DIR/points.txt | head -n 3 | tail -n 1)
         semi_dark_color=$(cat $BASE_DIR/points.txt | head -n 6 | tail -n 1)
         light_color=$(cat $BASE_DIR/points.txt | head -n 9 | tail -n 1)
-        wallpaper=$(realpath "$1")
+        wallpaper=$1
     fi
 fi
 
 # this refers to the git directory structure because all is done via symlinks
 config_file="$BASE_DIR/../i3/config"
-i3blocks_config_file="$BASE_DIR/../i3/i3blocks.conf"
+i3blocks_config_file="$BASE_DIR/../i3/config_files/i3blocks.conf"
 tmp_file="$BASE_DIR/tmp"
 
 if [ -e $config_file ] && [ -e $i3blocks_config_file ];
