@@ -23,7 +23,7 @@ pulseaudio &
 #discord-canary &
 #spotify &
 #slack &
-~/apps/src/iris-floss/iris-floss 5200 60
+~/apps/src/iris-floss/iris-floss 5200 60 &
 
 i3-msg restart
 
