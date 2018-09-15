@@ -29,7 +29,7 @@ sudo apt-get install -q \
     lxappearance\
     ranger\
     rofi\
-    rxvt-unicode\
+    rxvt-unicode-256color\
     scrot\
     unzip\
     vim\

@@ -2,10 +2,10 @@
 set $mod Mod4
 
 # this lines are modified when the wallpaper is changed
-set $bg-color #050b25
-set $inactive-bg-color #050b25
-set $text-color #fb8466
-set $inactive-text-color #11124a
+set $bg-color #745e51
+set $inactive-bg-color #745e51
+set $text-color #cddecc
+set $inactive-text-color #df9a59
 set $urgent-bg-color      #e53935
 set $indicator            #123456
 
@@ -122,12 +122,12 @@ bar {
 
 
 # i3-gaps SPECIFIC ------------------------------------------------------------
-#set $inner 8
-#set $outer 8
-#gaps inner $inner
-#gaps outer $outer
-#for_window [class="^.*"] border pixel 0
-#hide_edge_borders both
+set $inner 8
+set $outer 8
+gaps inner $inner
+gaps outer $outer
+for_window [class="^.*"] border pixel 0
+hide_edge_borders both
 # no borders on windows
 #new_window normal 0 px
 
