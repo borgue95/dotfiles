@@ -152,13 +152,12 @@ ln -sf $(pwd)/config_files/Xdefaults ~/.Xdefaults
 
 ask_for_configuration() {
     title="Select a type of configuration"
-    text="Here are some pre-configured environments. Select the most appropiate:"
+    text="Here are some pre-configured environments. Select the most appropiate (use the space bar to select an item):"
     config=$($DIALOG --title "$title" --radiolist "$text" $HEIGHT $WIDTH 2 \
         1 "Mac with Ubuntu 18" on \
         2 "Desktop with Ubuntu 16" off
     )
     echo $config
-    
 }
 
 setting_up_scripts() {
@@ -225,7 +224,7 @@ then
     ln -sf $o_scripts/keyboard_backlight.py $d_scripts/keyboard_backlight.py
 elif [[ "$config" = "desktopUbuntu16" ]]
 then
-    ln -sf $o_scripts/init/desktopUbuntu.sh $d_i3/second_init.sh
+    ln -sf $o_scripts/init/desktopUbuntu16.sh $d_i3/second_init.sh
 #elif [[ "$config" = "otherConfigHere" ]]
 #then
 #    # do things
