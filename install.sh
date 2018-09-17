@@ -160,7 +160,6 @@ then
 fi
 cd i3
 autoreconf --force --install
-rm -rf build/
 mkdir -p build && cd build/
 ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
 make
@@ -170,6 +169,8 @@ cd $current_dir
 ###############################################################################
 # SETTING UP URXVT
 ln -sf $(pwd)/config_files/Xdefaults ~/.Xdefaults
+mkdir -p ~/.urxvt/ext
+ln -sf $(pwd)/config_files/close-gracefully ~/.urxvt/ext
 
 ###############################################################################
 # SETTING UP SCRIPTS
