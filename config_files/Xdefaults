@@ -43,7 +43,7 @@ URxvt.font:         8x13
 !URxvt.font: 		xft:officecodepro:size=11
 URxvt.scrollBar:	false
 URxvt.cursorColor:	white
-!URxvt.perl-ext-common:	default,matcher,close-gracefully
+URxvt.perl-ext-common:	default,matcher,close-gracefully
 !,bell-command
 !URxvt.perl-lib:		$HOME/.config/Scripts
 !URxvt.url-launcher:	/usr/bin/xdg-open
