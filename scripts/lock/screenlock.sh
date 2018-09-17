@@ -23,7 +23,10 @@ y=$((540 - $(identify -format '%h' $LOCK)/2))
 composite -geometry +$x+$y $LOCK $TMP $TMP
 
 # lock
-i3lock -e -i $TMP
+trap revert HUP INT TERM
+xset +dpms dpms 5 5 5
+i3lock -e -n -i $TMP
+xset dpms 0 0 0
 
 # cleanup
 rm $TMP
