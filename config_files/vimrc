@@ -47,7 +47,7 @@ syntax enable
 " GRUVBOX config
 let g:gruvbox_contrast_dark="soft"
 set background=dark " Setting dark mode
-silent! colorscheme gruvbox
+colorscheme gruvbox
 
 " SEOUL 256 config
 "let g:seoul256_srgb = 1
