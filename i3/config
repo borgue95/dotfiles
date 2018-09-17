@@ -2,10 +2,10 @@
 set $mod Mod4
 
 # this lines are modified when the wallpaper is changed
-set $bg-color #745e51
-set $inactive-bg-color #745e51
-set $text-color #cddecc
-set $inactive-text-color #df9a59
+set $bg-color #1f2c10
+set $inactive-bg-color #1f2c10
+set $text-color #99bbe0
+set $inactive-text-color #6b6d6c
 set $urgent-bg-color      #e53935
 set $indicator            #123456
 
@@ -14,8 +14,10 @@ set $CONFIGS ~/.config/i3
 set $SCRIPTS ~/.config/i3/scripts
 set $term urxvt
 # found by arandr
-set $monitor1 "DVI-D-1"
-set $monitor2 "VGA-0"
+#set $monitor1 "DVI-D-1"
+#set $monitor2 "VGA-0"
+set $monitor1 "eDP1"
+set $monitor2 "eDP1"
 
 # BINDSYMS FOR PROGRAMS -------------------------------------------------------
 
@@ -66,6 +68,12 @@ bindsym Print exec --no-startup-id scrot -u '%Y%m%d_%H%M%S.png' -e 'mv $f ~/Imat
 # install imagemagick...
 bindsym $mod+Print exec --no-startup-id bash $SCRIPTS/screenshot_full.sh
 bindsym --release $mod+Shift+Print exec --no-startup-id $SCRIPTS/screenshot_selection.sh
+
+# media keys
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
+bindsym XF86KbdBrightnessDown exec --no-startup-id $SCRIPTS/keyboard_backlight.py --down
+bindsym XF86KbdBrightnessUp exec --no-startup-id $SCRIPTS/keyboard_backlight.py --up
 
 # i3 SPECIFIC -----------------------------------------------------------------
 
@@ -193,7 +201,7 @@ bindsym $mod+space focus mode_toggle
 # WORKSPACES ------------------------------------------------------------------
 
 set $workspace1 "1: "
-set $workspace2 "2: "
+set $workspace2 "2: "
 set $workspace3 "3: "
 set $workspace4 "4: "
 set $workspace5 "5: "

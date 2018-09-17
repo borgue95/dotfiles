@@ -50,7 +50,7 @@ if [[ ! $last_result -eq "1" ]]
 then
     case $distro in
         1)
-            bash install_scripts/app_generic_ubuntu.sh
+            #bash install_scripts/app_generic_ubuntu.sh
             ;;
         2)
             bash install_scripts/app_generic_arch.sh
@@ -142,6 +142,30 @@ fi
 
 ###############################################################################
 # SETTING UP I3-GAPS
+
+i3gaps_installing() {
+    title="i3 gaps"
+    infobox="Installing i3 gaps from source... please wait"
+    $DIALOG --title "$title" --infobox "$infobox" $HEIGHT $WIDTH
+}
+
+i3gaps_installing
+
+current_dir=$(pwd)
+mkdir -p ~/apps/src
+cd ~/apps/src
+if [ ! -d "i3" ]
+then
+    git clone https://github.com/Airblader/i3.git
+fi
+cd i3
+autoreconf --force --install
+rm -rf build/
+mkdir -p build && cd build/
+../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
+make
+sudo make install
+cd $current_dir
 
 ###############################################################################
 # SETTING UP URXVT
