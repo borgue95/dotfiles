@@ -1,9 +1,10 @@
 sudo add-apt-repository ppa:aguignard/ppa -y -u
-sudo apt-get install -q \
+sudo apt-get install -y -q \
     arandr\
     autoconf\
     automake\
     build-essential\
+    curl\
     feh\
     git\
     i3blocks\
