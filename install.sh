@@ -266,3 +266,15 @@ im_done() {
 
 im_done
 myexit 0
+
+# COSES A FER:
+# - Cada programa té el seu script de configuració amb les seves opcions
+#   Cada script instala el programa, les dependències, i els configs
+#   - Resta de programes sense config (vim, git, etc, etc)
+#   - Arandr
+#   - Ranger
+#   - URXVT
+#   - zathura
+#   - i3 (i3 sol i gaps)
+#   - scripts útils
+
