@@ -22,19 +22,19 @@ pulseaudio &
 #discord-canary &
 #spotify &
 #slack &
-~/apps/src/iris-floss/iris-floss 5200 60 &
+~/apps/src/iris-floss/iris-floss 4500 40 &
 
 i3-msg restart
 
 # miscelanious
 # disable motherboard speaker
-#xset b off
+xset b off
 # modify keyboard repeat (delay, rate)
-#xset r rate 250 50
+xset r rate 250 50
 # lock Num Lock (install xdotool)
-#xdotool key Num_Lock
+xdotool key Num_Lock
 # move mouse to the center of primary screen
-#xdotool mousemove --screen 0 960 540
+xdotool mousemove --screen 0 960 540
 
 # init wallpapers
 #feh --bg-scale "$(cat ~/.config/i3/last_wallpaper)" \

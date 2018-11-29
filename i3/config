@@ -48,7 +48,8 @@ bindsym $mod+Return exec $term
 # TODO mirar com coi funciona bé el rofi
 #bindsym $mod+d exec rofi -show run -config $CONFIGS/rofi.conf -fullscreen -font "System San Francisco Display 16"
 #bindsym $mod+d exec rofi -show run -lines 10 -padding 380 -opacity 85 -bg "$bg-color" -fg "$text-color" -bgalt "$bg-color" -hlbg "#6c7893" -hlfg "#f9fafb" -width 1920 -font "System San Francisco Display 16"
-bindsym $mod+d exec --no-startup-id rofi -show run -lines 10 -opacity 85 -bg "$bg-color" -fg "$text-color" -bgalt "$bg-color" -hlbg "$inactive-text-color" -hlfg "#f9fafb" -width 1000 -font "System San Francisco Display 16"
+#bindsym $mod+d exec --no-startup-id rofi -show run -lines 10 -opacity 85 -bg "$bg-color" -fg "$text-color" -bgalt "$bg-color" -hlbg "$inactive-text-color" -hlfg "#f9fafb" -width 1000 -font "System San Francisco Display 16"
+bindsym $mod+d exec --no-startup-id rofi -show run -lines 10 
 
 # lock
 bindsym $mod+F12 exec bash $SCRIPTS/lock/screenlock.sh

@@ -7,7 +7,7 @@ then
     temp1=${temp1:5:4}
     temp1=$temp1'\xc2\xb0'C  # this is the degree symbol
 else
-    temp1=$(sensors | grep "Package id 0: " | awk '{print $4}')
+    temp1=$(sensors | grep "CPUTIN:" | awk '{print $2}')
     temp1=${temp1:1}
 fi
 
