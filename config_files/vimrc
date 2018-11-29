@@ -78,7 +78,7 @@ map <F2> :NERDTreeToggle<CR>
 nnoremap <F3> :set hlsearch!<CR>       " Toggle visibility of search results
 
 " LaTeX basic compilation
-autocmd FileType tex map <F5> :!w<CR>:!make<CR><CR>
+autocmd FileType tex,markdown map <F5> :!w<CR>:!make<CR><CR>
 map <F6> :setlocal spell! spelllang=ca<CR>
 map <F7> gwip                          " wrap text inside the paragraph
 map <F8> vipJ                          " unwrap text inside the paragraph
@@ -94,6 +94,7 @@ set number relativenumber
 set t_Co=256
 
 let g:spellfile_URL = 'http://ftp.vim.org/vim/runtime/spell'
+autocmd FileType tex,markdown set textwidth=79  " autowrap at 80 characters
 
 " Split navigation config
 map <C-j> <C-w>j

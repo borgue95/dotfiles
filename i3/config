@@ -16,8 +16,6 @@ set $term urxvt
 # found by arandr
 set $monitor1 "DVI-D-1"
 set $monitor2 "VGA-0"
-#set $monitor1 "eDP1"
-#set $monitor2 "eDP1"
 
 # BINDSYMS FOR PROGRAMS -------------------------------------------------------
 
@@ -116,8 +114,8 @@ bindsym $mod+r mode "resize"
 bar {
     position bottom
     status_command i3blocks -c $CONFIGS/config_files/i3blocks.conf
-    tray_output $monitor2
-    font pango:DejaVu Sans Mono, FontAwesome 10
+    tray_output $monitor1
+    font pango:DejaVu Sans Mono, FontAwesome 11
     colors{
         background $bg-color
         separator  $text-color

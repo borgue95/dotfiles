@@ -55,6 +55,13 @@ URxvt.perl-ext-common:	default,matcher,close-gracefully
 
 URxvt.colorUL:		#4682B4
 
+! Disable auto scrolling on new output
+URxvt*scrollTtyOutput:      false
+URxvt*scrollWithBuffer:     true
+URxvt*scrollTtyKeypress:    true
+
+URxvt.saveLines: 20000
+
 !URxvt.keysym.Control-Up:    \033[1;5A
 !URxvt.keysym.Control-Down:  \033[1;5B
 URxvt.keysym.Control-Left:  \033[1;5D

@@ -50,7 +50,7 @@ if [[ ! $last_result -eq "1" ]]
 then
     case $distro in
         1)
-            #bash install_scripts/app_generic_ubuntu.sh
+            bash install_scripts/app_generic_ubuntu.sh
             ;;
         2)
             bash install_scripts/app_generic_arch.sh
@@ -160,7 +160,6 @@ then
 fi
 cd i3
 autoreconf --force --install
-rm -rf build/
 mkdir -p build && cd build/
 ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
 make
@@ -168,8 +167,16 @@ sudo make install
 cd $current_dir
 
 ###############################################################################
+# FONT AWESOME
+
+curl -o .fonts/fontawesome.zip https://use.fontawesome.com/releases/v5.5.0/fontawesome-free-5.5.0-desktop.zip
+unzip .fonts/fontawesome.zip
+
+###############################################################################
 # SETTING UP URXVT
 ln -sf $(pwd)/config_files/Xdefaults ~/.Xdefaults
+mkdir -p ~/.urxvt/ext
+ln -sf $(pwd)/config_files/close-gracefully ~/.urxvt/ext
 
 ###############################################################################
 # SETTING UP SCRIPTS
@@ -216,10 +223,13 @@ d_ranger=~/.config/ranger
 o_scripts=$(pwd)/scripts
 d_scripts=$d_i3/scripts
 
+mkdir -p ~/.config/i3
 ln -sf $o_i3/config $d_i3/config
 ln -sf $o_i3/init.sh $d_i3/init.sh
 
 mkdir -p ~/.config/i3/config_files
+mv ~/.bashrc ~/.bashrc_old
+ln -sf $o_config_files/bashrc ~/.bashrc
 ln -sf $o_config_files/compton.conf $d_config_fiels/compton.conf
 ln -sf $o_config_files/i3blocks.conf $d_config_fiels/i3blocks.conf
 ln -sf $o_config_files/rofi.conf $d_config_fiels/rofi.conf
@@ -265,3 +275,15 @@ im_done() {
 
 im_done
 myexit 0
+
+# COSES A FER:
+# - Cada programa té el seu script de configuració amb les seves opcions
+#   Cada script instala el programa, les dependències, i els configs
+#   - Resta de programes sense config (vim, git, etc, etc)
+#   - Arandr
+#   - Ranger
+#   - URXVT
+#   - zathura
+#   - i3 (i3 sol i gaps)
+#   - scripts útils
+
