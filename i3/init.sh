@@ -16,14 +16,14 @@ feh --bg-fill "$(cat $HOME/.config/i3/scripts/wallpaper/last_wallpaper)" \
     --bg-fill "$(cat $HOME/.config/i3/scripts/wallpaper/last_wallpaper)"
 
 # startup apps
-bash $HOME/.config/i3/scripts/getmyip.sh
+#bash $HOME/.config/i3/scripts/getmyip.sh &
 #google-chrome &
 dropbox start &
 pulseaudio &
 #discord-canary &
 #spotify &
 #slack &
-~/apps/src/iris-floss/iris-floss 5200 60 &
+~/apps/src/iris-floss/iris-floss 4300 90 &
 
 i3-msg restart
 
