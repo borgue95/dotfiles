@@ -2,10 +2,10 @@
 set $mod Mod4
 
 # this lines are modified when the wallpaper is changed
-set $bg-color #213708
-set $inactive-bg-color #213708
-set $text-color #a0cbf8
-set $inactive-text-color #4b565a
+set $bg-color #152640
+set $inactive-bg-color #152640
+set $text-color #d9d1c6
+set $inactive-text-color #9da2a5
 set $urgent-bg-color      #e53935
 set $indicator            #123456
 
@@ -14,8 +14,8 @@ set $CONFIGS ~/.config/i3
 set $SCRIPTS ~/.config/i3/scripts
 set $term urxvt
 # found by arandr
-set $monitor1 "DVI-D-1"
-set $monitor2 "VGA-0"
+set $monitor1 "eDP1"
+set $monitor2 "eDP1"
 
 # BINDSYMS FOR PROGRAMS -------------------------------------------------------
 
@@ -63,10 +63,13 @@ exec --no-startup-id bash $CONFIGS/init.sh
 exec_always --no-startup-id compton --config $CONFIGS/config_files/compton.conf
 
 # install scrot...
-bindsym Print exec --no-startup-id scrot -u '%Y%m%d_%H%M%S.png' -e 'mv $f ~/Imatges/screen_shots/'
+bindsym Print exec --no-startup-id $SCRIPTS/screenshot.sh
+bindsym $mod+Shift+p exec --no-startup-id $SCRIPTS/screenshot.sh
 # install imagemagick...
 bindsym $mod+Print exec --no-startup-id bash $SCRIPTS/screenshot_full.sh
+bindsym $mod+Control+p exec --no-startup-id bash $SCRIPTS/screenshot_full.sh
 bindsym --release $mod+Shift+Print exec --no-startup-id $SCRIPTS/screenshot_selection.sh
+bindsym --release $mod+Control+o exec --no-startup-id $SCRIPTS/screenshot_selection.sh
 
 # media keys
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5

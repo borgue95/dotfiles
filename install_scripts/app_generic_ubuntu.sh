@@ -4,6 +4,7 @@ sudo apt-get install -y -q \
     autoconf\
     automake\
     build-essential\
+    compton\
     curl\
     feh\
     git\

@@ -3,6 +3,25 @@
 # prevent error snowballing
 set -e -o errexit
 
+if [ ! -f $(which dialog) ]
+then
+    echo "First of all, install \"dialog\" wiht your favourite package manager"
+    echo "Then, re-run this script"
+    exit 1
+fi
+
+# make a directory to store files from this desktop config
+# this directory is used across all scripts. do not change it
+mkdir -p ~/.config/i3/internal
+
+# TODO change desktop wallpaper should use this folder
+# TODO init script should look for files in this folder
+# TODO arandrconfig should live in this folder
+
+# TODO how to save in a file the name and order of monitors in order to 
+# i3 config file founds it. Beware that i cannot modify config file because it 
+# is being readed. 
+
 DIALOG="dialog --stdout"
 WIDTH=50
 HEIGHT=14
