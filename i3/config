@@ -2,10 +2,10 @@
 set $mod Mod4
 
 # this lines are modified when the wallpaper is changed
-set $bg-color #2a3112
-set $inactive-bg-color #2a3112
-set $text-color #f1d58c
-set $inactive-text-color #7aa8d9
+set $bg-color #43556b
+set $inactive-bg-color #43556b
+set $text-color #a3aab2
+set $inactive-text-color #8b9aad
 set $urgent-bg-color      #e53935
 set $indicator            #123456
 
@@ -14,7 +14,7 @@ set $CONFIGS ~/.config/i3
 set $SCRIPTS ~/.config/i3/scripts
 set $term urxvt
 # found by arandr
-set $monitor1 "DP-3"
+set $monitor1 "DP-1"
 set $monitor2 "DVI-I-0"
 
 # BINDSYMS FOR PROGRAMS -------------------------------------------------------

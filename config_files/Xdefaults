@@ -20,7 +20,8 @@
 
 # neutral_blue + bright_blue
 *.color4: #458588
-*.color12: #79a5ad
+!*.color12: #79a5ad
+*.color12: #71a0a8
 
 # neutral_purple + bright_purple
 *.color5: #b16286
@@ -31,11 +32,14 @@
 *.color14: #8ec07c
 
 # light4 + light1
-*.color7: #a89984
-*.color15: #ebdbb2
+!*.color7: #a89984
+!*.color15: #ebdbb2
+*.color7: #d5cdc3
+*.color15: #f4f3f0
 
 !URxvt.intensityStyles:	false
-URxvt.background:       #23272A
+!URxvt.background:       #23272A
+URxvt.background:       #2e3438
 !URxvt.background:       [98]#23272A
 !URxvt.depth:		32
 URxvt.font:         8x13
