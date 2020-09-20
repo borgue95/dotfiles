@@ -2,10 +2,17 @@
 set $mod Mod4
 
 # this lines are modified when the wallpaper is changed
+<<<<<<< HEAD
 set $bg-color #11100c
 set $inactive-bg-color #11100c
 set $text-color #9b9ca0
 set $inactive-text-color #9e7a46
+=======
+set $bg-color #43556b
+set $inactive-bg-color #43556b
+set $text-color #a3aab2
+set $inactive-text-color #8b9aad
+>>>>>>> 6657d2c11b5cf64afe65d76218fe8d0952824afb
 set $urgent-bg-color      #e53935
 set $indicator            #123456
 
@@ -14,8 +21,13 @@ set $CONFIGS ~/.config/i3
 set $SCRIPTS ~/.config/i3/scripts
 set $term urxvt
 # found by arandr
+<<<<<<< HEAD
 set $monitor1 "eDP1"
 set $monitor2 "HDMI1"
+=======
+set $monitor1 "DP-1"
+set $monitor2 "DVI-I-0"
+>>>>>>> 6657d2c11b5cf64afe65d76218fe8d0952824afb
 
 # BINDSYMS FOR PROGRAMS -------------------------------------------------------
 
@@ -31,7 +43,7 @@ for_window [instance="stuff"] resize set 800 300
 for_window [instance="stuff"] move position center
 for_window [instance="stuff"] move scratchpad
 
-# scratch pad init
+# scratchpad init
 exec --no-startup-id $term -name math -e python
 exec --no-startup-id $term -name stuff
 bindsym $mod+a [instance="math"] scratchpad show; move position center
@@ -100,6 +112,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
+<<<<<<< HEAD
         bindsym j resize shrink width 2 px or 2 ppt
         bindsym k resize grow height 2 px or 2 ppt
         bindsym l resize shrink height 2 px or 2 ppt
@@ -109,6 +122,17 @@ mode "resize" {
         bindsym Down resize grow height 2 px or 2 ppt
         bindsym Up resize shrink height 2 px or 2 ppt
         bindsym Right resize grow width 2 px or 2 ppt
+=======
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        bindsym Right resize shrink width 10 px or 10 ppt
+        bindsym Up resize grow height 10 px or 10 ppt
+        bindsym Down resize shrink height 10 px or 10 ppt
+        bindsym Left resize grow width 10 px or 10 ppt
+>>>>>>> 6657d2c11b5cf64afe65d76218fe8d0952824afb
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -117,10 +141,11 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 bar {
+    output $monitor1
+    tray_output $monitor1
     position bottom
     status_command i3blocks -c $CONFIGS/config_files/i3blocks.conf
-    tray_output $monitor1
-    font pango:DejaVu Sans Mono, FontAwesome 11
+    font pango:DejaVu Sans Mono, FontAwesome 10
     colors{
         background $bg-color
         separator  $text-color
@@ -132,6 +157,22 @@ bar {
     }
 }
 
+bar {
+    output $monitor2
+    position bottom
+    status_command i3blocks -c $CONFIGS/config_files/i3blocks-short.conf
+    #tray_output $monitor2
+    font pango:DejaVu Sans Mono, FontAwesome 10
+    colors{
+        background $bg-color
+        separator  $text-color
+        #                  border             background         text
+        active_workspace   $inactive-bg-color $inactive-bg-color $inactive-text-color
+        focused_workspace  $bg-color          $bg-color          $text-color
+        inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+        urgent_workspace   $uregnt-bg-color   $urgent-bg-color   $text-color
+    }
+}
 
 # i3-gaps SPECIFIC ------------------------------------------------------------
 set $inner 8
@@ -167,10 +208,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+h move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -309,7 +350,7 @@ for_window [class="Microsoft Teams - Preview"] floating enable
 # media keys
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 2dB+ unmute && pkill -44 i3blocks 
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 2dB- unmute && pkill -44 i3blocks
-bindsym XF86AudioMute exec --no-startup-id amixer -D pulse set Master toggle             && pkill -44 i3blocks
+bindsym XF86AudioMute exec --no-startup-id amixer -D pulse set Master toggle       && pkill -44 i3blocks
 
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioPause exec --no-startup-id playerctl pause

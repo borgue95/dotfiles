@@ -86,6 +86,8 @@ map <F9> :Goyo<CR>                     " Toggle Goyo
 
 " VIM CONFIG
 " -----------------------------------------------------------------------------
+vnoremap <C-c> "+y
+map <C-v> "+p
 
 vnoremap <C-c> "+y
 map <C-v> "+p
@@ -139,9 +141,6 @@ set wildmenu
 
 " TEX MACROS
 " -----------------------------------------------------------------------------
-
-autocmd FileType tex set textwidth=79  " autowrap at 80 characters
-
 " Navigation
 " yanks the <++> pattern to the _ register
 autocmd FileType tex inoremap <Tab><Tab> <Esc>/<++><CR>"_ca<
