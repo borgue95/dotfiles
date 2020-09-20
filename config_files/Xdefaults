@@ -38,18 +38,19 @@
 URxvt.background:       #23272A
 !URxvt.background:       [98]#23272A
 !URxvt.depth:		32
-URxvt.font:         8x13
+!URxvt.font:         8x13
 !URxvt.font:         9x15
 !URxvt.font: 		xft:officecodepro:size=11
+URxvt.font: xft:bitstream vera sans mono:size=12:antialias=true
 URxvt.scrollBar:	false
 URxvt.cursorColor:	white
-URxvt.perl-ext-common:	default,matcher,close-gracefully
 !,bell-command
 !URxvt.perl-lib:		$HOME/.config/Scripts
 !URxvt.url-launcher:	/usr/bin/xdg-open
 !URxvt.matcher.button:	1
-!URxvt.resize-font.smaller:	C-Down
-!URxvt.resize-font.bigger:	C-Up
+URxvt.resize-font.smaller:	C-Down
+URxvt.resize-font.bigger:	C-Up
+URxvt.perl-ext-common:	default,matcher,close-gracefully,resize-font
 
 !URxvt.bell-command: aplay ~/drip.wav
 

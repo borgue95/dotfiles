@@ -2,10 +2,10 @@
 set $mod Mod4
 
 # this lines are modified when the wallpaper is changed
-set $bg-color #152640
-set $inactive-bg-color #152640
-set $text-color #d9d1c6
-set $inactive-text-color #9da2a5
+set $bg-color #11100c
+set $inactive-bg-color #11100c
+set $text-color #9b9ca0
+set $inactive-text-color #9e7a46
 set $urgent-bg-color      #e53935
 set $indicator            #123456
 
@@ -15,7 +15,7 @@ set $SCRIPTS ~/.config/i3/scripts
 set $term urxvt
 # found by arandr
 set $monitor1 "eDP1"
-set $monitor2 "eDP1"
+set $monitor2 "HDMI1"
 
 # BINDSYMS FOR PROGRAMS -------------------------------------------------------
 
@@ -38,7 +38,9 @@ bindsym $mod+a [instance="math"] scratchpad show; move position center
 bindsym $mod+s [instance="stuff"] scratchpad show; move position center
 bindsym $mod+shift+a exec --no-startup-id $term -name math -e python
 bindsym $mod+shift+s exec --no-startup-id $term -name stuff
-bindsym $mod+u exec --no-startup-id $SCRIPTS/dmenumount.sh
+
+bindsym $mod+u exec --no-startup-id $SCRIPTS/dmenu_mount.sh
+bindsym $mod+shift+u exec --no-startup-id $SCRIPTS/dmenu_umount.sh
 
 # start a terminal
 bindsym $mod+Return exec $term
@@ -98,15 +100,15 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym ntilde resize grow width 10 px or 10 ppt
+        bindsym j resize shrink width 2 px or 2 ppt
+        bindsym k resize grow height 2 px or 2 ppt
+        bindsym l resize shrink height 2 px or 2 ppt
+        bindsym ntilde resize grow width 2 px or 2 ppt
 
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 2 px or 2 ppt
+        bindsym Down resize grow height 2 px or 2 ppt
+        bindsym Up resize shrink height 2 px or 2 ppt
+        bindsym Right resize grow width 2 px or 2 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -299,6 +301,8 @@ assign [class="Slack"] $workspaceF10
 #assign [class="discord"] $workspaceF9
 #assign [class="^Spotify$"] $workspace10
 #for_window [class="Spotify"] move to workspace $workspaceF9
+for_window [class="QGraphicsTest"] floating enable
+for_window [class="Microsoft Teams - Preview"] floating enable
 #for_window [title="RayTracer"] floating enable
 #for_window [title="Practica 2: GiVD 2016-2017"] floating enable
 

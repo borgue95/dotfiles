@@ -11,18 +11,19 @@ i3-msg restart
 
 # init wallpapers
 #bash wallpaper.sh &
-feh --bg-fill "$(cat $HOME/.config/i3/scripts/wallpaper/last_wallpaper)" \
-    --bg-fill "$(cat $HOME/.config/i3/scripts/wallpaper/last_wallpaper)"
+~/.fehbg &
 
 # startup apps
-bash $HOME/.config/i3/scripts/getmyip.sh &
+#bash $HOME/.config/i3/scripts/getmyip.sh &
 #google-chrome &
-dropbox start &
+#dropbox start &
 pulseaudio &
+nm-applet &
+nextcloud &
 #discord-canary &
 #spotify &
 #slack &
-~/apps/src/iris-floss/iris-floss 4500 40 &
+~/apps/src/iris-floss/iris-floss 4000 90 &
 
 i3-msg restart
 
